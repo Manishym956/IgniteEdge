@@ -1,5 +1,5 @@
 import React from 'react';
-import SignupPage from './signup';
+import SignupPage from './Signup';
 //import LoginPage from "./Login";
 import './App.css';
 
