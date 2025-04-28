@@ -9,9 +9,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import SignupPage from './Authentication/Signup';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
-
+import SignupPage from './Authentication/Signup';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,6 +22,7 @@ ChartJS.register(
 );
 
 const App = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <header className="header">
@@ -31,9 +32,8 @@ const App = () => {
             <li>About Us</li>
             <li>Pricing</li>
             <li>Features</li>
-            <li onClick={() => {
-              window.location.href = '/Authentication/Signup';
-            }}>Sign Up</li>
+            <li onClick={() => { navigate('/signup') }}>Sign Up</li>
+
           </ul>
         </nav>
       </header>
