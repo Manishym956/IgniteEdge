@@ -1,35 +1,97 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { useNavigate, Link } from 'react-router-dom';
+import './App.css';
+import SignupPage from './Authentication/Signup';
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
+  const navigate = useNavigate();
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <header className="header">
+        <h1>InsightEdge</h1>
+        <nav>
+          <ul>
+            <li>About Us</li>
+            <li>Pricing</li>
+            <li>Features</li>
+            <div className="signup">
+            <button onClick={() => navigate('/Authentication/Signup')}>Sign Up</button>
+            </div>
+          </ul>
+        </nav>
+      </header>
 
-export default App
+      <div className="banner">
+        <h2>EMPOWER YOUR INVESTMENT STRATEGY WITH INSIGHTEDGE</h2>
+        <p>Unlock ultimate business analytics dashboard</p>
+        <button className="trial-button" onClick={() => navigate('/Authentication/Signup')}>Start Free Trial</button>
+      </div>
+
+      <section className="graph">
+      <div className="graph-text">
+        <h3>Monitor key metrics for your business</h3>
+        <p>
+          Harness the power of key Performance Indicators. 
+          Track your growth and insights effectively.ljed;oicqnwiubyinxgxnjshc
+          sjsnfkndixxh
+          efdicamcugbnloifl nhvifuvk
+          ceinxdjxgiuimnhcducngori
+          ecinjcgriliudrvmjrivyndnrhgrcu
+          qrtaueirtothovurttuhntthnuhntu
+          ucryec9t7rycygcroiyyuigmrhcowhcgmi
+          ncirurgchbhclweurghulchrmuomvhrteuynruturlecgimytchlwcmiylimyulhmiyuh
+          orvymlwemorytvhlnryu ulnviuyt
+          orgy orry lund chutiya
+          ceinowhgoqyrehgcolm.\ueipmotla
+        </p>
+        </div>
+        <div className="bar-chart">
+        <BarChart />
+       </div>
+      </section>
+    </div>
+  );
+};
+
+const BarChart = () => {
+  const data = {
+    labels: ['Figma', 'Sketch', 'XD'],
+    datasets: [
+      {
+        label: '2020',
+        data: [60, 70, 50],
+        backgroundColor: '#4B86F2',
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  return <Bar data={data} options={options} />;
+};
+
+export default App;
