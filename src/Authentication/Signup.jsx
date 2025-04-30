@@ -26,7 +26,7 @@ const SignupPage = () => {
       
       <div className="login-right">
         <div className="form-container">
-          <h1>Login</h1>
+          <h1>Sign-Up</h1><br></br>
 
 
           
@@ -59,11 +59,6 @@ const SignupPage = () => {
             
             <button type="submit" className="login-btn">Create Account</button>
           </form>
-        </div>
-        
-        <div className="language-selector">
-          English (UK)
-          <span className="dropdown-arrow">▼</span>
         </div>
       </div>
     </div>
