@@ -9,9 +9,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import SignupPage from './Authentication/Signup';
+import { useNavigate, Link } from 'react-router-dom';
 import './App.css';
-
+import SignupPage from './Authentication/Signup';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,6 +22,7 @@ ChartJS.register(
 );
 
 const App = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <header className="header">
@@ -31,9 +32,9 @@ const App = () => {
             <li>About Us</li>
             <li>Pricing</li>
             <li>Features</li>
-            <li onClick={() => {
-              window.location.href = '/Authentication/Signup';
-            }}>Sign Up</li>
+            <div className="signup">
+            <button onClick={() => navigate('/Authentication/Signup')}>Sign Up</button>
+            </div>
           </ul>
         </nav>
       </header>
@@ -41,7 +42,7 @@ const App = () => {
       <div className="banner">
         <h2>EMPOWER YOUR INVESTMENT STRATEGY WITH INSIGHTEDGE</h2>
         <p>Unlock ultimate business analytics dashboard</p>
-        <button className="trial-button">Start Free Trial</button>
+        <button className="trial-button" onClick={() => navigate('/Authentication/Signup')}>Start Free Trial</button>
       </div>
 
       <section className="graph">
@@ -49,7 +50,17 @@ const App = () => {
         <h3>Monitor key metrics for your business</h3>
         <p>
           Harness the power of key Performance Indicators. 
-          Track your growth and insights effectively.
+          Track your growth and insights effectively.ljed;oicqnwiubyinxgxnjshc
+          sjsnfkndixxh
+          efdicamcugbnloifl nhvifuvk
+          ceinxdjxgiuimnhcducngori
+          ecinjcgriliudrvmjrivyndnrhgrcu
+          qrtaueirtothovurttuhntthnuhntu
+          ucryec9t7rycygcroiyyuigmrhcowhcgmi
+          ncirurgchbhclweurghulchrmuomvhrteuynruturlecgimytchlwcmiylimyulhmiyuh
+          orvymlwemorytvhlnryu ulnviuyt
+          orgy orry lund chutiya
+          ceinowhgoqyrehgcolm.\ueipmotla
         </p>
         </div>
         <div className="bar-chart">

@@ -10,18 +10,6 @@ const LoginPage = () => {
 
         <div className="logo">IgniteEdge</div>
         <img src={officeIcon} alt="Office icon" />
-        <div className="illustration">
-          {/* <img src={officeIcon} alt="Office icon" /> */}
-          <div className="office-scene">
-            <div className="people">
-              {/* Simple representation of the people in the illustration */}
-            </div>
-            <div className="plants">
-              {/* <img src={officeIcon} alt="Office icon" /> */}
-              {/* Plants representation */}
-            </div>
-          </div>
-        </div>
       </div>
       
       <div className="login-right">
@@ -52,11 +40,6 @@ const LoginPage = () => {
             
             <button type="submit" className="login-btn">LOGIN</button>
           </form>
-        </div>
-        
-        <div className="language-selector">
-          English (UK)
-          <span className="dropdown-arrow">▼</span>
         </div>
       </div>
     </div>
