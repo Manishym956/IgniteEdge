@@ -42,7 +42,7 @@ const App = () => {
       <div className="banner">
         <h2>EMPOWER YOUR INVESTMENT STRATEGY WITH INSIGHTEDGE</h2>
         <p>Unlock ultimate business analytics dashboard</p>
-        <button className="trial-button">Start Free Trial</button>
+        <button className="trial-button" onClick={() => navigate('/Authentication/Signup')}>Start Free Trial</button>
       </div>
 
       <section className="graph">
@@ -50,7 +50,17 @@ const App = () => {
         <h3>Monitor key metrics for your business</h3>
         <p>
           Harness the power of key Performance Indicators. 
-          Track your growth and insights effectively.
+          Track your growth and insights effectively.ljed;oicqnwiubyinxgxnjshc
+          sjsnfkndixxh
+          efdicamcugbnloifl nhvifuvk
+          ceinxdjxgiuimnhcducngori
+          ecinjcgriliudrvmjrivyndnrhgrcu
+          qrtaueirtothovurttuhntthnuhntu
+          ucryec9t7rycygcroiyyuigmrhcowhcgmi
+          ncirurgchbhclweurghulchrmuomvhrteuynruturlecgimytchlwcmiylimyulhmiyuh
+          orvymlwemorytvhlnryu ulnviuyt
+          orgy orry lund chutiya
+          ceinowhgoqyrehgcolm.\ueipmotla
         </p>
         </div>
         <div className="bar-chart">
