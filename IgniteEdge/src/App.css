@@ -132,3 +132,87 @@ body, html {
 .signup button:hover {
   background-color:  #274bc3;
 }
+
+.title{
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.pricing-container {
+  display: flex;
+  justify-content: space-between; 
+  margin: 2rem 0;
+}
+
+.pricing-box {
+  background-color: white; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  padding: 2rem; 
+  flex: 1; 
+  margin: 0 1rem; 
+  text-align: center;
+}
+
+.pricing-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem; 
+}
+
+
+.pricing-detail {
+  font-size: 1rem;
+  margin-bottom: 1.5rem; 
+}
+
+.buy-now {
+  background-color: #1e3a8a;; 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px;
+  cursor: pointer; 
+}
+
+.benefits {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  margin: 2rem 0; 
+}
+
+.benefit {
+  background-color: white; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  padding: 1.5rem; 
+  margin: 1rem; 
+  flex: 0 0 30%; 
+  text-align: center; 
+}
+
+.feature-title {
+  font-weight: bold; 
+  margin-bottom: 1.5rem; 
+}
+
+.description{
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.feature-description {
+  font-size: 0.9rem; 
+}
+
+@media (max-width: 768px) {
+  .pricing-container, .features-container {
+      flex-direction: column; 
+      align-items: center; 
+  }
+  
+  .pricing-box, .benefits {
+      width: 90%; 
+      margin: 0.5rem 0; 
+  }
+}
