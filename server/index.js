@@ -4,6 +4,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 
-server.listen(1600,()=>{
-    console.log("Server is running on port 1600");
+server.listen(PORT,()=>{
+    console.log(`Server is running on port ${PORT}`);
 });
