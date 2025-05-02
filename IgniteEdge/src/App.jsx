@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div>
       <header className="header">
-        <h1>InsightEdge</h1>
+        <h1>IgniteEdge</h1>
         <nav>
           <ul>
             <li>About Us</li>
@@ -59,7 +59,6 @@ const App = () => {
           ucryec9t7rycygcroiyyuigmrhcowhcgmi
           ncirurgchbhclweurghulchrmuomvhrteuynruturlecgimytchlwcmiylimyulhmiyuh
           orvymlwemorytvhlnryu ulnviuyt
-          orgy orry lund chutiya
           ceinowhgoqyrehgcolm.\ueipmotla
         </p>
         </div>
