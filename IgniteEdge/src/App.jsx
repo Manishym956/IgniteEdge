@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { useNavigate, Link } from 'react-router-dom';
 import './App.css';
+import img2 from './Images/img2.jpg';
 import SignupPage from './Authentication/Signup';
 ChartJS.register(
   CategoryScale,
@@ -111,7 +112,7 @@ const App = () => {
         <div className='title'><h3>What You Get with IgniteEdge</h3></div>
         <div className='features-container'>
           <div className='description'>
-        <p>
+        <p style={{color: 'white'}}>
           From deep dive research reports to powerful quantitative analysis tools,<br></br> 
           Business Quant provides everything you need to make well-informed investment decisions.
         </p>
@@ -144,6 +145,43 @@ const App = () => {
           </div>
         </div>
       </section>
+      <section className="testimonials">
+        <div className="title">
+          <h3>What They Say</h3>
+          <p>Their opinion about the provided good values with the experience they've gone through.</p>
+        </div>
+        <div className="testimonial-container">
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="call-to-action">
+        <h2>Let's Start Investing Your Assets With InsightEdge</h2>
+        <p>Join our platform community and start investing in Business Quant</p>
+        <img src={img2} alt="Illustration" />
+        <button onClick={() => navigate('/Authentication/Signup')}>Become a Member</button>
+      </section>
+
+      <footer>
+        <p>InsightEdge © 2025. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
