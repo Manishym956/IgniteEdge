@@ -138,6 +138,11 @@ body, html {
   font-size: 1.5rem;
 }
 
+.pricing {
+  background: linear-gradient(to bottom, transparent 0%, transparent 30%, #5f708e 30%);
+}
+
+
 .pricing-container {
   display: flex;
   justify-content: space-between; 
@@ -152,6 +157,17 @@ body, html {
   flex: 1; 
   margin: 0 1rem; 
   text-align: center;
+}
+
+.pricing-box:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease;
+}
+
+.pricing-box:hover .buy-now {
+  background-color:  #2563eb; 
+  color: white;
 }
 
 .pricing-title {
@@ -215,4 +231,110 @@ body, html {
       width: 90%; 
       margin: 0.5rem 0; 
   }
+}
+
+.testimonials {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+.testimonials .title h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f2a37;
+}
+
+.testimonials .title p {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 2.5rem;
+}
+
+.testimonial-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.testimonial {
+  background-color: #f3f4f6;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  max-width: 300px;
+  flex: 1 1 250px;
+  text-align: left;
+}
+
+.testimonial h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.testimonial p {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0.3rem 0;
+}
+
+.call-to-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: #fff;
+  flex-wrap: wrap;
+}
+
+.call-to-action h2 {
+  font-size: 1.75rem;
+  color: #1f2a37;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  max-width: 500px;
+}
+
+.call-to-action p {
+  color: #6b7280;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 480px;
+}
+
+.call-to-action button {
+  background-color: #1f2a37;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.call-to-action button:hover {
+  background-color: #374151;
+}
+
+.call-to-action img {
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+footer {
+  background-color: #5f708e;
+  color: white;
+  padding: 3rem 2rem;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: -40px; 
+  position: relative;
+  z-index: 1;
 }
