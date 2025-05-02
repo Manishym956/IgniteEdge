@@ -2,8 +2,10 @@ import React from 'react';
 import './Login.css';
 import googleIcon from './assets/google-icon.svg';
 import officeIcon from './assets/office.png';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="login-container">
       <div className="login-left">
@@ -14,7 +16,7 @@ const LoginPage = () => {
       
       <div className="login-right">
         <div className="form-container">
-          <h1>Create Account</h1>
+          <h1>Login</h1>
           
           <div className="social-buttons">
             <button className="google-btn">
@@ -40,6 +42,9 @@ const LoginPage = () => {
             
             <button type="submit" className="login-btn">LOGIN</button>
           </form>
+          <div className="signup-link" style={{ cursor: 'pointer', marginTop: '10px' }}>
+            <p onClick={() => navigate('/Authentication/Signup')}>Don't have an account? Sign Up</p>
+          </div>
         </div>
       </div>
     </div>
