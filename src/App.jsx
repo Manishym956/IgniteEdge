@@ -9,8 +9,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, href } from 'react-router-dom';
 import './App.css';
+import img2 from './Images/img2.jpg';
 import SignupPage from './Authentication/Signup';
 ChartJS.register(
   CategoryScale,
@@ -21,17 +22,24 @@ ChartJS.register(
   Legend
 );
 
+const scrollToClass = (className) => {
+  const element = document.querySelector(`.${className}`);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 const App = () => {
   const navigate = useNavigate();
   return (
     <div>
       <header className="header">
-        <h1>InsightEdge</h1>
+        <h1>IgniteEdge</h1>
         <nav>
           <ul>
-            <li>About Us</li>
-            <li>Pricing</li>
-            <li>Features</li>
+          <li><a href="#" onClick={() => scrollToClass('graph')}  style={{ color: 'black' }}>About Us</a></li>
+            <li><a href="#" onClick={() => scrollToClass('pricing')}  style={{ color: 'black' }}>Pricing</a></li>
+            <li ><a href="#" onClick={() => scrollToClass('features-container')}  style={{ color: 'black' }}>Features</a></li>
             <div className="signup">
             <button onClick={() => navigate('/Authentication/Signup')}>Sign Up</button>
             </div>
@@ -59,7 +67,6 @@ const App = () => {
           ucryec9t7rycygcroiyyuigmrhcowhcgmi
           ncirurgchbhclweurghulchrmuomvhrteuynruturlecgimytchlwcmiylimyulhmiyuh
           orvymlwemorytvhlnryu ulnviuyt
-          orgy orry lund chutiya
           ceinowhgoqyrehgcolm.\ueipmotla
         </p>
         </div>
@@ -111,7 +118,7 @@ const App = () => {
         <div className='title'><h3>What You Get with IgniteEdge</h3></div>
         <div className='features-container'>
           <div className='description'>
-        <p>
+        <p style={{color: 'white'}}>
           From deep dive research reports to powerful quantitative analysis tools,<br></br> 
           Business Quant provides everything you need to make well-informed investment decisions.
         </p>
@@ -144,6 +151,81 @@ const App = () => {
           </div>
         </div>
       </section>
+      <section className="testimonials">
+        <div className="title">
+          <h3>What They Say</h3>
+          <p>Their opinion about the provided good values with the experience they've gone through.</p>
+        </div>
+        <div className="testimonial-container">
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="call-to-action">
+      <div className="text-content">
+        <h2>Let's Start Investing Your<br></br>
+           Assets With InsightEdge</h2>
+        <p>Join our platform community and start investing in IgniteEdge</p>
+        <button onClick={() => navigate('/Authentication/Signup')}>Become a Member</button>
+      </div>
+      <div className='image'>
+        <img src={img2} alt="Illustration" />
+        </div>
+      </section>
+      <footer className="site-footer">
+  <div className="footer-container">
+    <div className="footer-brand">
+      <h3>InsightEdge</h3>
+      <p>
+        At InsightEdge, we provide reliable insights across a company’s fundamentals and investor resources.
+      </p>
+      <div className="footer-socials">
+        <a href="#"><i className="fab fa-linkedin-in"></i></a>
+        <a href="#"><i className="fab fa-instagram"></i></a>
+        <a href="#"><i className="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+
+    <div className="footer-links">
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">SiteMap</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Plans & Pricing</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div className="footer-bottom">
+    <p>Copyright © 2025 InsightEdge. All rights reserved.</p>
+  </div>
+</footer>
     </div>
   );
 };

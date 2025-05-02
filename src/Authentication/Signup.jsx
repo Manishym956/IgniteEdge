@@ -2,12 +2,14 @@ import React from 'react';
 import './Signup.css';
 import googleIcon from './assets/google-icon.svg';
 import officeIcon from './assets/office.png';
+import { useNavigate, Link } from 'react-router-dom';
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="login-container">
       <div className="login-left">
-        <div className="logo">IgniteEdge</div>
+        <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>IgniteEdge</div>
         <img src={officeIcon} alt="Office icon" />
       </div>
       <div className="login-right">
@@ -33,7 +35,10 @@ const SignupPage = () => {
               <input type="password" placeholder="Password" className="form-input" />
             </div>
             <button type="submit" className="login-btn">Create Account</button>
-          </form>
+          </form> 
+          <div className="login-link"  style={{ cursor: 'pointer', marginTop: '10px' }}>
+            <p onClick={() => navigate('/Authentication/Login')}>Already have an account? Login</p>
+          </div>
         </div>
       </div>
     </div>
