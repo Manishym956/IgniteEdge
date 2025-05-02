@@ -67,6 +67,83 @@ const App = () => {
         <BarChart />
        </div>
       </section>
+      <section className="pricing">
+        <div className="title"><h2>Plans & Pricing</h2></div>
+        <div className="pricing-container">
+          <div className="pricing-box">
+            <div className='pricing-title'><h3>Basic</h3></div>
+            <div className='pricing-detail'><p>Free</p>
+            <ul>
+              <li>✔ Access select public datasets</li>
+              <li>✔ No payment required</li>
+              <li>✔ Limited features</li>
+              <li>✔ No credit card required</li>
+            </ul>
+            </div>
+            <button className="buy-now">Get Started Free</button>
+          </div>
+          <div className="pricing-box">
+          <div className='pricing-title'><h3>Monthly</h3></div>
+          <div className='pricing-detail'><p>$49/month</p>
+            <ul>
+              <li>✔ Full access to all premium datasets</li>
+              <li>✔ Download & export data</li>
+              <li>✔ Access to all financial KPIs</li>
+              <li>✔ Custom dashboards</li>
+            </ul>
+            </div>
+            <button className="buy-now">Buy Now</button>
+          </div>
+          <div className="pricing-box">
+          <div className='pricing-title'><h3>Yearly</h3></div>
+          <div className='pricing-detail'><p>$499/year</p>
+            <ul>
+              <li>✔ Full access to all premium datasets</li>
+              <li>✔ Download & export data</li>
+              <li>✔ Access to all financial KPIs</li>
+              <li>✔ Custom dashboards</li>
+            </ul>
+            </div>
+            <button className="buy-now">Buy Now</button>
+          </div>
+        </div>
+
+        <div className='title'><h3>What You Get with IgniteEdge</h3></div>
+        <div className='features-container'>
+          <div className='description'>
+        <p>
+          From deep dive research reports to powerful quantitative analysis tools,<br></br> 
+          Business Quant provides everything you need to make well-informed investment decisions.
+        </p>
+        </div>
+        <div className="benefits">
+          <div className="benefit">
+            <div className='feature-title'><h4>Deep Dives Research Reports</h4></div>
+            <p>In-depth research on high-quality companies with long-term growth potential.</p>
+          </div>
+          <div className="benefit">
+          <div className='feature-title'><h4>Quantitative Analysis Tools</h4></div>
+            <p>Quickly identify winning investments using statistical models.</p>
+          </div>
+          <div className="benefit">
+          <div className='feature-title'><h4>Priority Support</h4></div>
+            <p>Get fast, personalized support from our team of investing experts.</p>
+          </div>
+          <div className="benefit">
+          <div className='feature-title'><h4>Investment Guides</h4></div>
+            <p>Comprehensive guides to various investing strategies, available to all users.</p>
+          </div>
+          <div className="benefit">
+          <div className='feature-title'><h4>Investor Community Access</h4></div>
+            <p>Join our platform community and gain valuable insights from other members.</p>
+          </div>
+          <div className="benefit">
+          <div className='feature-title'><h4>Multiple User Access</h4></div>
+            <p>Share your account with up to three team members.</p>
+          </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
@@ -93,5 +170,7 @@ const BarChart = () => {
 
   return <Bar data={data} options={options} />;
 };
+
+
 
 export default App;
