@@ -22,6 +22,13 @@ ChartJS.register(
   Legend
 );
 
+const scrollToClass = (className) => {
+  const element = document.querySelector(`.${className}`);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 const App = () => {
   const navigate = useNavigate();
   return (
@@ -30,9 +37,9 @@ const App = () => {
         <h1>IgniteEdge</h1>
         <nav>
           <ul>
-            <li>About Us</li>
-            <li>Pricing</li>
-            <li>Features</li>
+          <li><a href="#" onClick={() => scrollToClass('graph')}  style={{ color: 'black' }}>About Us</a></li>
+             <li><a href="#" onClick={() => scrollToClass('pricing')}  style={{ color: 'black' }}>Pricing</a></li>
+             <li ><a href="#" onClick={() => scrollToClass('features-container')}  style={{ color: 'black' }}>Features</a></li>
             <div className="signup">
             <button onClick={() => navigate('/Authentication/Signup')}>Sign Up</button>
             </div>
@@ -50,17 +57,12 @@ const App = () => {
       <div className="graph-text">
         <h3>Monitor key metrics for your business</h3>
         <p>
-          Harness the power of key Performance Indicators. 
-          Track your growth and insights effectively.ljed;oicqnwiubyinxgxnjshc
-          sjsnfkndixxh
-          efdicamcugbnloifl nhvifuvk
-          ceinxdjxgiuimnhcducngori
-          ecinjcgriliudrvmjrivyndnrhgrcu
-          qrtaueirtothovurttuhntthnuhntu
-          ucryec9t7rycygcroiyyuigmrhcowhcgmi
-          ncirurgchbhclweurghulchrmuomvhrteuynruturlecgimytchlwcmiylimyulhmiyuh
-          orvymlwemorytvhlnryu ulnviuyt
-          ceinowhgoqyrehgcolm.\ueipmotla
+        Harness the power of Key Performance Indicators (KPIs) to stay on top of your business performance. 
+        Visualize revenue, profit margins, employee expenses, and more in real-time. 
+        Gain insights from clear, actionable data to make informed decisions and drive strategic growth. 
+        Our dashboard gives you a comprehensive overview—all in one place. 
+        Customize your data views with filters and tags tailored to your workflow. 
+        Stay ahead of the curve with automated trend analysis and alerts for key changes.
         </p>
         </div>
         <div className="bar-chart">
@@ -107,13 +109,12 @@ const App = () => {
             <button className="buy-now">Buy Now</button>
           </div>
         </div>
-
         <div className='title'><h3>What You Get with IgniteEdge</h3></div>
         <div className='features-container'>
           <div className='description'>
         <p style={{color: 'white'}}>
           From deep dive research reports to powerful quantitative analysis tools,<br></br> 
-          Business Quant provides everything you need to make well-informed investment decisions.
+          IgniteEdge provides everything you need to make well-informed investment decisions.
         </p>
         </div>
         <div className="benefits">
@@ -168,22 +169,76 @@ const App = () => {
             <p>⭐⭐⭐⭐⭐</p>
             <p>Amazing Experience! I couldn’t be happier!</p>
           </div>
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
+          <div className="testimonial">
+            <h4>Sophia Carter</h4>
+            <p>on Mar 12, 2024</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Amazing Experience! I couldn’t be happier!</p>
+          </div>
         </div>
       </section>
 
       <section className="call-to-action">
-        <h2>Let's Start Investing Your Assets With InsightEdge</h2>
-        <p>Join our platform community and start investing in Business Quant</p>
-        <img src={img2} alt="Illustration" />
+        <div className='text-content'>
+        <h2>Let's Start Investing Your <br></br>
+          Assets With InsightEdge</h2>
+          <p>
+          Join our growing community and take control of your financial journey. 
+          Start investing smarter with real-time insights and powerful analytics from IgniteEdge.
+          </p>
         <button onClick={() => navigate('/Authentication/Signup')}>Become a Member</button>
+        </div>
+        <div className='cta-image'>
+        <img src={img2} alt="Illustration" />
+        </div>
       </section>
 
-      <footer>
-        <p>InsightEdge © 2025. All rights reserved.</p>
-      </footer>
-    </div>
-  );
-};
+      <footer className="site-footer">
+   <div className="footer-container">
+     <div className="footer-brand">
+       <h3>InsightEdge</h3>
+       <p>
+         At InsightEdge, we provide reliable insights across a company’s fundamentals and investor resources.
+       </p>
+       <div className="footer-socials">
+         <a href="#"><i className="fab fa-linkedin-in"></i></a>
+         <a href="#"><i className="fab fa-instagram"></i></a>
+         <a href="#"><i className="fab fa-facebook-f"></i></a>
+       </div>
+     </div>
+ 
+     <div className="footer-links">
+       <div>
+         <h4>Resources</h4>
+         <ul>
+           <li><a href="#">About Us</a></li>
+           <li><a href="#">SiteMap</a></li>
+           <li><a href="#">Contact Us</a></li>
+         </ul>
+       </div>
+       <div>
+         <h4>Company</h4>
+         <ul>
+           <li><a href="#">Terms of Use</a></li>
+           <li><a href="#">Privacy Policy</a></li>
+           <li><a href="#">Plans & Pricing</a></li>
+         </ul>
+       </div>
+     </div>
+   </div>
+   <div className="footer-bottom">
+     <p>Copyright © 2025 InsightEdge. All rights reserved.</p>
+   </div>
+ </footer>
+     </div>
+   );
+ };
 
 const BarChart = () => {
   const data = {

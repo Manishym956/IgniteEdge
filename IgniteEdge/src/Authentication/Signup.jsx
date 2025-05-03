@@ -9,7 +9,7 @@ const SignupPage = () => {
   return (
     <div className="login-container">
       <div className="login-left">
-        <div className="logo">IgniteEdge</div>
+      <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>IgniteEdge</div>
         <img src={officeIcon} alt="Office icon" />
       </div>
       <div className="login-right">

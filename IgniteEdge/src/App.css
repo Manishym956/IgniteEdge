@@ -139,9 +139,21 @@ body, html {
 }
 
 .pricing {
-  background: linear-gradient(to bottom, transparent 0%, transparent 30%, #5f708e 30%);
+  position: relative;
+  background: linear-gradient(to bottom, transparent 30%, #8190a9 30%);
+  z-index: 0;
 }
 
+.pricing::after {
+  content: '';
+  position: absolute;
+  bottom: -3rem;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: #8190a9;
+  z-index: -1;
+}
 
 .pricing-container {
   display: flex;
@@ -207,6 +219,12 @@ body, html {
   text-align: center; 
 }
 
+.benefit:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease;
+}
+
 .feature-title {
   font-weight: bold; 
   margin-bottom: 1.5rem; 
@@ -260,10 +278,10 @@ body, html {
 }
 
 .testimonial {
-  background-color: #f3f4f6;
+  background-color: #dadbdb;
   padding: 1.5rem;
   border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 10px rgba(20, 19, 19, 0.05);
   max-width: 300px;
   flex: 1 1 250px;
   text-align: left;
@@ -285,27 +303,35 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4rem 2rem;
   background-color: #fff;
   flex-wrap: wrap;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
 }
 
-.call-to-action h2 {
+.text-content {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text-content h2 {
   font-size: 1.75rem;
   color: #1f2a37;
   font-weight: 700;
   margin-bottom: 1rem;
-  max-width: 500px;
 }
 
-.call-to-action p {
+.text-content p {
   color: #6b7280;
   font-size: 1rem;
   margin-bottom: 1.5rem;
-  max-width: 480px;
 }
 
-.call-to-action button {
+.text-content button {
   background-color: #1f2a37;
   color: #fff;
   padding: 0.75rem 1.5rem;
@@ -314,27 +340,108 @@ body, html {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: fit-content;
 }
 
-.call-to-action button:hover {
+.text-content button:hover {
   background-color: #374151;
 }
 
-.call-to-action img {
-  max-width: 380px;
+.cta-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.cta-image img {
+  max-width: 400px;
   width: 100%;
   height: auto;
   margin-left: 2rem;
   margin-top: 2rem;
 }
 
-footer {
-  background-color: #5f708e;
-  color: white;
-  padding: 3rem 2rem;
-  font-size: 0.9rem;
+
+.site-footer {
+  background-color: #1f2937;
+  color: #fff;
+  width: 100%;
+  padding: 3rem 2rem 1rem;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  flex: 1 1 300px;
+  margin-bottom: 2rem;
+}
+
+.footer-brand h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-brand p {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  max-width: 350px;
+}
+
+.footer-socials a {
+  margin-right: 0.8rem;
+  font-size: 1.2rem;
+  color: #9ca3af;
+  transition: color 0.3s;
+}
+
+.footer-socials a:hover {
+  color: #fff;
+}
+
+.footer-links {
+  display: flex;
+  gap: 4rem;
+  flex: 1 1 400px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.footer-links h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
   text-align: center;
-  margin-top: -40px; 
-  position: relative;
-  z-index: 1;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  border-top: 1px solid #374151;
+  padding-top: 1rem;
 }
