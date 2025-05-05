@@ -11,7 +11,7 @@ export const register=async(req,res)=>{
         return res.json({success:false,message:'Missing Details'})
     }
     try{
-        const existingUser=await userModel.fingOne({email})
+        const existingUser=await userModel.findOne({email})
         if(existingUser){
             return res.json({success:false,message:"User already exists"});
         }
