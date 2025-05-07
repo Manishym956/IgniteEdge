@@ -3,9 +3,26 @@ import './Login.css';
 import googleIcon from './assets/google-icon.svg';
 import officeIcon from './assets/office.png';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { loginUser } from '../../lib/api';
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await loginUser(email, password);
+      console.log('Login successful:', data);
+      navigate('/dashboard'); 
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed');
+    }
+  };
   return (
     <div className="login-container">
       <div className="login-left">
