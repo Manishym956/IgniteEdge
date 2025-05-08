@@ -8,6 +8,9 @@ import userRouter from './routes/userRoutes.js';
 const app = express();
 const port = process.env.PORT || 1600;
 connectDB();
+
+app.use(cors());
+
 app.use(express.json());
 app.use(cookieparser());
 //endpoints-ym
