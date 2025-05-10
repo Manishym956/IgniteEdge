@@ -21,7 +21,6 @@ const LoginPage = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.email) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
     if (!formData.password) newErrors.password = 'Password is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -35,15 +34,14 @@ const LoginPage = () => {
     try {
       const response = await authService.login(formData.email, formData.password);
       if (response.success) {
-        toast.success(response.message);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        navigate('/');
+        toast.success('Login successful!');
+        setTimeout(() => navigate('/'), 1500);
       } else {
-        toast.error(response.message);
+        toast.error(response.message || 'Login failed');
       }
     } catch (error) {
       console.error('Login error:', error);
-      toast.error(error.response?.data?.message || 'An error occurred. Please try again.');
+      toast.error(error.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
     }

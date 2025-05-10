@@ -77,7 +77,7 @@ const App = () => {
       </header>
 
       <div className="banner">
-        <h2>EMPOWER YOUR INVESTMENT STRATEGY WITH INSIGHTEDGE</h2>
+        <h2>EMPOWER YOUR INVESTMENT STRATEGY WITH IGNITEEDGE</h2>
         <p>Unlock ultimate business analytics dashboard</p>
         <button className="trial-button" onClick={() => navigate('/Authentication/Signup')}>Start Free Trial</button>
       </div>
