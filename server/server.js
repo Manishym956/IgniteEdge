@@ -8,8 +8,19 @@ import userRouter from './routes/userRoutes.js';
 const app = express();
 const port = process.env.PORT || 1600;
 connectDB();
-app.use(express.json());
+
+// Update CORS configuration
+app.use(cors({
+  origin: 'http://localhost:5173', // Replace with your frontend URL
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Add cookie parser before routes
 app.use(cookieparser());
+app.use(express.json());
+
 //endpoints-ym
 app.get('/', (req,res)=>res.send('API is running'));
 app.use('/api/auth', authRouter)

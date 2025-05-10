@@ -1,16 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import authService from '../services/authService';
 import './Login.css';
 import googleIcon from './assets/google-icon.svg';
 import officeIcon from './assets/office.png';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
+    if (!formData.password) newErrors.password = 'Password is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+    
+    setLoading(true);
+    try {
+      const response = await authService.login(formData.email, formData.password);
+      if (response.success) {
+        toast.success(response.message);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        navigate('/');
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error(error.response?.data?.message || 'An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="login-container">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="login-left">
-
-      <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>IgniteEdge</div>
+        <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>IgniteEdge</div>
         <img src={officeIcon} alt="Office icon" />
       </div>
       
@@ -19,28 +62,61 @@ const LoginPage = () => {
           <h1>Login</h1>
           
           <div className="social-buttons">
-            <button className="google-btn">
+            <button 
+              type="button"
+              className="google-btn"
+              onClick={() => toast.info('Google sign-in coming soon!')}
+            >
               <img src={googleIcon} alt="Google icon" />
-              SignIn With Google
+              Sign In With Google
             </button>
-            
-           
           </div>
           
           <div className="divider">
             <span>-OR-</span>
           </div>
           
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleSubmit} noValidate>
             <div className="form-group">
-              <input type="email" placeholder="Email" className="form-input" />
+              <input 
+                type="email" 
+                name="email"
+                placeholder="Email" 
+                className={`form-input ${errors.email ? 'error' : ''}`}
+                value={formData.email}
+                onChange={handleChange} 
+              />
+              {errors.email && <span className="error-message">{errors.email}</span>}
             </div>
             
-            <div className="form-group">
-              <input type="password" placeholder="Password" className="form-input" />
+            <div className="form-group password-group">
+              <input 
+                type={showPassword ? "text" : "password"}
+                name="password" 
+                placeholder="Password" 
+                className={`form-input ${errors.password ? 'error' : ''}`}
+                value={formData.password}
+                onChange={handleChange} 
+              />
+              <button 
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? '👁️' : '👁️‍🗨️'}
+              </button>
+              {errors.password && <span className="error-message">{errors.password}</span>}
             </div>
             
-            <button type="submit" className="login-btn">LOGIN</button>
+            <button 
+              type="submit" 
+              className="login-btn" 
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="loading-spinner"></span>
+              ) : 'LOGIN'}
+            </button>
           </form>
           <div className="signup-link" style={{ cursor: 'pointer', marginTop: '10px' }}>
             <p onClick={() => navigate('/Authentication/Signup')}>Don't have an account? Sign Up</p>
