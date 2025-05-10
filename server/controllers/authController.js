@@ -167,7 +167,7 @@ export const resetPassword=async(req,res)=>{
             return res.json({success:false,message:"User not found"});
         }
         if(user.resetOtp===''|| user.resetOtp!==otp){
-            return res.json({success:false,message:"Invalid OTP"});
+            return res.json({success:false,message:"Invalid OTP"});   
         }
         if(user.resetOtpExpireAt<Date.now()){
             return res.json({success:false,message:"OTP expired"});
