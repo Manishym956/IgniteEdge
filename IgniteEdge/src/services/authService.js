@@ -2,8 +2,10 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:1600/api/auth';
 
-// Configure axios defaults
-axios.defaults.withCredentials = true;
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  withCredentials: true
+});
 
 const authService = {
     login: async (email, password) => {

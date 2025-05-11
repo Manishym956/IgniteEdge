@@ -9,23 +9,15 @@ const app = express();
 const port = process.env.PORT || 1600;
 connectDB();
 
-<<<<<<< HEAD
-// Update CORS configuration
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend URL
+  origin: 'http://localhost:5173', 
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Add cookie parser before routes
-=======
-app.use(cors());
-
 app.use(express.json());
->>>>>>> e619bf206777862053fd43b75eae8806b8883b1d
 app.use(cookieparser());
-app.use(express.json());
 
 //endpoints-ym
 app.get('/', (req,res)=>res.send('API is running'));
