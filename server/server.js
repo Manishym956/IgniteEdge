@@ -9,6 +9,8 @@ const app = express();
 const port = process.env.PORT || 1600;
 connectDB();
 
+
+
 app.use(cors({
   origin: 'http://localhost:5173', 
   credentials: true,
