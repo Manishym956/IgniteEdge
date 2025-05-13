@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useNavigate, Link, Route, Routes } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './App.css';
 import img2 from './Images/img2.jpg';
 import SignupPage from './Authentication/Signup';
@@ -59,7 +59,6 @@ const App = () => {
             <li><a href="#" onClick={() => scrollToClass('graph')} style={{ color: 'black' }}>About Us</a></li>
             <li><a href="#" onClick={() => scrollToClass('pricing')} style={{ color: 'black' }}>Pricing</a></li>
             <li><a href="#" onClick={() => scrollToClass('features-container')} style={{ color: 'black' }}>Features</a></li>
-            <li><a onClick={() => navigate('/onboarding')} style={{ color: 'black', cursor: 'pointer' }}>Onboarding</a></li>
             <div className="auth-section">
               {isAuthenticated ? (
                 <div className="profile-icon">
