@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 
 const authService = {
     login: async (email, password) => {
-        const response = await axios.post(`${API_URL}/login`, { email, password });
+        const response = await axiosInstance.post('/login', { email, password });
         return response.data;
     },
 
@@ -17,7 +17,7 @@ const authService = {
         try {
             console.log('Sending registration request:', { name, email }); // Debug log
 
-            const response = await axios.post(`${API_URL}/register`, {
+            const response = await axiosInstance.post('/register', {
                 name,
                 email,
                 password
@@ -27,24 +27,25 @@ const authService = {
             return response.data;
         } catch (error) {
             console.error('Registration error:', error.response?.data || error.message);
-            throw error.response?.data || error;
+            throw error.response?.data || { message: 'An unexpected error occurred' };
         }
     },
 
     logout: async () => {
-        const response = await axios.get(`${API_URL}/logout`);
+        const response = await axiosInstance.get('/logout');
         return response.data;
     },
 
     verifyEmail: async (userId, otp) => {
         try {
-            const response = await axios.post(`${API_URL}/verify-account`, { 
+            const response = await axiosInstance.post('/verify-account', { 
                 userId, 
                 otp 
             });
             return response.data;
         } catch (error) {
-            throw error.response?.data || error;
+            console.error('Email verification error:', error.response?.data || error.message);
+            throw error.response?.data || { message: 'Verification failed' };
         }
     },
 
@@ -52,13 +53,13 @@ const authService = {
         try {
             console.log('Sending OTP request for userId:', userId); // Debug log
 
-            const response = await axios.post(`${API_URL}/send-verify-otp`, { userId });
+            const response = await axiosInstance.post('/send-verify-otp', { userId });
             
             console.log('OTP response:', response.data); // Debug log
             return response.data;
         } catch (error) {
             console.error('Send OTP error:', error.response?.data || error.message);
-            throw error.response?.data || error;
+            throw error.response?.data || { message: 'Failed to send OTP' };
         }
     }
 };
