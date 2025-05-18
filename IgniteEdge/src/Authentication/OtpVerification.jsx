@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import authService from '../services/authService';
 import './OtpVerification.css';
 
-const OtpVerification = () => {
+export const OtpVerification = () => {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);

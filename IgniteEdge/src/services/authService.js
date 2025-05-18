@@ -61,7 +61,17 @@ const authService = {
             console.error('Send OTP error:', error.response?.data || error.message);
             throw error.response?.data || { message: 'Failed to send OTP' };
         }
-    }
+    },
+
+    isAuthenticated: async () => {
+  try {
+    const response = await axiosInstance.post('/is-auth'); 
+    return response.data;
+  } catch (error) {
+    console.error('Auth check error:', error);
+    return { success: false };
+  }
+}
 };
 
 export default authService;
