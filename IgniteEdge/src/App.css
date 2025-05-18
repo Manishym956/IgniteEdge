@@ -99,6 +99,7 @@ body, html {
   flex: 1;
   min-width: 280px;
   max-width: 500px;
+  margin-left: 100px;
 }
 
 .graph-text h3 {
@@ -117,7 +118,10 @@ body, html {
   flex: 1;
   min-width: 300px;
   max-width: 600px;
+  margin-right: 100px;
+  height: 400px;
 }
+
 .signup button {
   background-color:  #1e3a8a;
   color: white;
@@ -164,7 +168,7 @@ body, html {
 .pricing-box {
   background-color: white; 
   border-radius: 8px; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); 
   padding: 2rem; 
   flex: 1; 
   margin: 0 1rem; 

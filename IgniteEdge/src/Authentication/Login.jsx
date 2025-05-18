@@ -35,7 +35,7 @@ const LoginPage = () => {
       const response = await authService.login(formData.email, formData.password);
       if (response.success) {
         toast.success('Login successful!');
-        setTimeout(() => navigate('/'), 1500);
+        setTimeout(() => navigate('/onboarding'), 1500);
       } else {
         toast.error(response.message || 'Login failed');
       }
