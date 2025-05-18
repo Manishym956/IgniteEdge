@@ -6,7 +6,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import authService from '../services/authService';
-import {OtpVerification} from './OtpVerification';
 
 const SignupPage = () => {
   const navigate = useNavigate();
