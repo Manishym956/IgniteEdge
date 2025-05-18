@@ -2,6 +2,22 @@ import { Home, Users, Clipboard, Settings, LogOut, TrendingUp } from 'lucide-rea
 import './Dashboard.css';
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+    const handleLogout = async () => {
+    try {
+      const response = await axios.get('http://localhost:1600/api/auth/logout', {
+        withCredentials: true, 
+      });
+      if (response.data.success) {
+        navigate('/'); 
+      } else {
+        alert('Logout failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+      alert('Logout failed. Please try again.');
+    }
+  };
   return (
     <div className="dashboard">
 <div className="sidebar">
