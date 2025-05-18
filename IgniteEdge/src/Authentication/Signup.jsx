@@ -61,7 +61,7 @@ const SignupPage = () => {
           toast.success('Verification code sent to your email!');
           // Navigate after a short delay to ensure toast is visible
           setTimeout(() => {
-            navigate('/verify-otp', {
+            navigate('/OtpVerification', {
               state: {
                 userId: registerResponse.user._id,
                 email: formData.email
