@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel.js';
 import transporter from '../config/nodemailer.js';
 
-
-
 export const register=async(req,res)=>{
     const {name,email,password}=req.body;
     if(!name||!email||!password){
@@ -19,7 +17,8 @@ export const register=async(req,res)=>{
         const user=new userModel({
             name,
             email,
-            password:hasshedPassword
+            password:hasshedPassword,
+            isAccountVerified: false
         })
         await user.save();
         const token =jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
@@ -28,10 +27,19 @@ export const register=async(req,res)=>{
             from: process.env.SENDER_EMAIL,
             to: email,
             subject: 'Welcome to IgniteEdge',
-            text: `Hello ${name},\n\nThank you for registering with IgniteEdge! You have registeresd through ${email} We are excited to have you on board.\n\nBest regards,\nThe IgniteEdge Team`,
+            text: `Hello ${name},\n\nThank you for registering with IgniteEdge! You have registered through ${email} We are excited to have you on board.\n\nBest regards,\nThe IgniteEdge Team`,
         }
         await transporter.sendMail(mailOptions);
-        return res.json({success:true,message:"User registered successfully",user:{name:user.name,email:user.email}})
+        return res.json({
+            success:true,
+            message:"User registered successfully",
+            user:{
+                _id: user._id,
+                name:user.name,
+                email:user.email,
+                isAccountVerified: user.isAccountVerified
+            }
+        })
     }catch(error){
         res.json({success:false,message:error.message})
     }
