@@ -365,6 +365,40 @@ body, html {
   margin-top: 2rem;
 }
 
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.auth-buttons button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.auth-buttons button:first-child {
+  background: transparent;
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.auth-buttons button:first-child:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.auth-buttons button:last-child {
+  background: #007bff;
+  border: none;
+  color: white;
+}
+
+.auth-buttons button:last-child:hover {
+  background: #0056b3;
+}
 
 .site-footer {
   background-color: #1f2937;
