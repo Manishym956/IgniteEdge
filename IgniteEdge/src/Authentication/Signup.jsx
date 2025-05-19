@@ -36,7 +36,6 @@ const SignupPage = () => {
     
     setLoading(true);
     try {
-      // First, try to register the user
       const registerResponse = await authService.register(
         formData.name,
         formData.email,
@@ -45,31 +44,36 @@ const SignupPage = () => {
 
       console.log('Register response:', registerResponse); // Debug log
 
-      if (registerResponse.success) {
+      if (registerResponse.success && registerResponse.user) {
         toast.success('Account created successfully!');
         
         // Store user data temporarily
         localStorage.setItem('tempUserId', registerResponse.user._id);
-        localStorage.setItem('tempEmail', formData.email);
+        localStorage.setItem('tempEmail', registerResponse.user.email);
 
         // Send verification OTP
-        const otpResponse = await authService.sendVerifyOtp(registerResponse.user._id);
-        
-        console.log('OTP response:', otpResponse); // Debug log
+        try {
+          const otpResponse = await authService.sendVerifyOtp(registerResponse.user._id);
+          
+          console.log('OTP response:', otpResponse); // Debug log
 
-        if (otpResponse.success) {
-          toast.success('Verification code sent to your email!');
-          // Navigate after a short delay to ensure toast is visible
-          setTimeout(() => {
-            navigate('/verify-otp', {
-              state: {
-                userId: registerResponse.user._id,
-                email: formData.email
-              }
-            });
-          }, 1500);
-        } else {
-          throw new Error(otpResponse.message || 'Failed to send verification code');
+          if (otpResponse.success) {
+            toast.success('Verification code sent to your email!');
+            // Navigate after a short delay to ensure toast is visible
+            setTimeout(() => {
+              navigate('/verify-otp', {
+                state: {
+                  userId: registerResponse.user._id,
+                  email: registerResponse.user.email
+                }
+              });
+            }, 1500);
+          } else {
+            throw new Error(otpResponse.message || 'Failed to send verification code');
+          }
+        } catch (otpError) {
+          console.error('OTP error:', otpError);
+          toast.error('Failed to send verification code. Please try again.');
         }
       } else {
         throw new Error(registerResponse.message || 'Registration failed');

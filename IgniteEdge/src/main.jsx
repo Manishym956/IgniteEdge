@@ -6,7 +6,8 @@ import SignupPage from './Authentication/Signup';
 import LoginPage from './Authentication/Login';
 import OtpVerification from './Authentication/OtpVerification';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Dashboard from './Authentication/Dashboard';
+import Dashboard from './pages/Dashboard';
+import Onboarding from './pages/Onboarding';
 
 
 // This is the main entry point for a Vite-based React application
@@ -17,6 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/Authentication/Signup" element={<SignupPage />} />
         <Route path="/Authentication/Login" element={<LoginPage />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Onboarding" element={<Onboarding />} />
         <Route 
           path="/verify-otp" 
           element={
