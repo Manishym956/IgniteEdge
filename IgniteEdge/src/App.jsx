@@ -271,6 +271,7 @@ const App = () => {
 
 const BarChart = () => {
   const data = {
+  maintainAspectRatio: false,
     labels: ['Figma', 'Sketch', 'XD'],
     datasets: [
       {
