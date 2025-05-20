@@ -64,14 +64,40 @@ const authService = {
     },
 
     isAuthenticated: async () => {
-  try {
-    const response = await axiosInstance.post('/is-auth'); 
-    return response.data;
-  } catch (error) {
-    console.error('Auth check error:', error);
-    return { success: false };
-  }
-}
+        try {
+            const response = await axiosInstance.post('/is-auth'); 
+            return response.data;
+        } catch (error) {
+            console.error('Auth check error:', error);
+            return { success: false };
+        }
+    },
+
+    sendResetOtp: async (email) => {
+        try {
+            console.log('Sending reset OTP API request for:', email); // Debug log
+            const response = await axiosInstance.post('/send-reset-otp', { email });
+            console.log('API Response:', response.data); // Debug log
+            return response.data;
+        } catch (error) {
+            console.error('API Error:', error.response?.data || error); // Debug log
+            throw error.response?.data || { message: 'Failed to send OTP' };
+        }
+    },
+
+    resetPassword: async (email, otp, newPassword) => {
+        try {
+            const response = await axiosInstance.post('/reset-password', {
+                email,
+                otp,
+                newPassword
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Reset password error:', error);
+            throw error.response?.data || { message: 'Failed to reset password' };
+        }
+    }
 };
 
 export default authService;
