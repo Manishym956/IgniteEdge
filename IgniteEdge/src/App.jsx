@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -13,7 +13,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import './App.css';
 import img2 from './Images/img2.jpg';
 import SignupPage from './Authentication/Signup';
-import authService from './services/authService'; // Assuming authService is imported
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -31,24 +30,7 @@ const scrollToClass = (className) => {
 };
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await authService.isAuthenticated();
-        setIsAuthenticated(response.success);
-        if (response.success) {
-          setUser(JSON.parse(localStorage.getItem('user')));
-        }
-      } catch (error) {
-        console.error('Auth check failed:', error);
-      }
-    };
-    checkAuth();
-  }, []);
 
   return (
     <div>
@@ -60,17 +42,10 @@ const App = () => {
             <li><a href="#" onClick={() => scrollToClass('pricing')} style={{ color: 'black' }}>Pricing</a></li>
             <li><a href="#" onClick={() => scrollToClass('features-container')} style={{ color: 'black' }}>Features</a></li>
             <div className="auth-section">
-              {isAuthenticated ? (
-                <div className="profile-icon">
-                  <img 
-                    src={user?.profileImage || '/default-avatar.png'} 
-                    alt="Profile" 
-                    onClick={() => navigate('/profile')}
-                  />
-                </div>
-              ) : (
+              <div className="auth-buttons">
+                <button onClick={() => navigate('/Authentication/Login')}>Login</button>
                 <button onClick={() => navigate('/Authentication/Signup')}>Sign Up</button>
-              )}
+              </div>
             </div>
           </ul>
         </nav>
