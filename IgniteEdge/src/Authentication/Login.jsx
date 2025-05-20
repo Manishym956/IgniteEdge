@@ -106,6 +106,12 @@ const LoginPage = () => {
               {errors.password && <span className="error-message">{errors.password}</span>}
             </div>
             
+            <div className="forgot-password-link">
+              <span onClick={() => navigate('/Authentication/forgot-password')}>
+                Forgot Password?
+              </span>
+            </div>
+            
             <button 
               type="submit" 
               className="login-btn" 
