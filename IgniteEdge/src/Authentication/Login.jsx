@@ -105,12 +105,8 @@ const LoginPage = () => {
               </button>
               {errors.password && <span className="error-message">{errors.password}</span>}
             </div>
-            
-            <div className="forgot-password-link">
-              <span onClick={() => navigate('/Authentication/forgot-password')}>
-                Forgot Password?
-              </span>
-            </div>
+            <div className="forgot-password" onClick={() => navigate('/Authentication/forgot-password')} 
+            style={{ cursor: 'pointer', textAlign: 'right', marginBottom: '15px', color: '#1a2d4d', fontSize: '14px' }}>Forgot Password?</div>
             
             <button 
               type="submit" 
