@@ -38,9 +38,21 @@ const App = () => {
         <h1>IgniteEdge</h1>
         <nav>
           <ul>
-            <li><a href="#" onClick={() => scrollToClass('graph')} style={{ color: 'black' }}>About Us</a></li>
-            <li><a href="#" onClick={() => scrollToClass('pricing')} style={{ color: 'black' }}>Pricing</a></li>
-            <li><a href="#" onClick={() => scrollToClass('features-container')} style={{ color: 'black' }}>Features</a></li>
+            <li><a
+                 href="#"
+                 onClick={(e) => {
+                 e.preventDefault(); 
+                 scrollToClass('graph');}}style={{ color: 'black' }}>About Us</a></li>
+            <li><a
+                 href="#"
+                 onClick={(e) => {
+                 e.preventDefault(); 
+                 scrollToClass('pricing');}}style={{ color: 'black' }}>Pricing</a></li>
+            <li><a
+                 href="#"
+                 onClick={(e) => {
+                 e.preventDefault();  
+                 scrollToClass('features-container');}}style={{ color: 'black' }}>Features</a></li>
             <div className="auth-section">
               <div className="auth-buttons">
                 <button onClick={() => navigate('/Authentication/Login')}>Login</button>

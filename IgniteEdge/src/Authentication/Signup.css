@@ -197,3 +197,50 @@
       width: 100%;
     }
   }
+
+  .form-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 40px 12px 12px; /* Padding-right allows space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
+  color: #666;
+  z-index: 1;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-password:focus {
+  outline: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.error {
+  border-color: red;
+}
