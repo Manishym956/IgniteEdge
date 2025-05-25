@@ -36,14 +36,14 @@
     height: auto;
   }
   
-  /* .illustration {
+  .illustration {
     height: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
   } */
   
-  /* .office-scene {
+   .office-icon {
     width: 100%;
     height: 100%;
     background-color: #e8f0f8;
@@ -51,7 +51,7 @@
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
-   */
+  
   /* Right side with form */
   .login-right {
     flex: 1;
