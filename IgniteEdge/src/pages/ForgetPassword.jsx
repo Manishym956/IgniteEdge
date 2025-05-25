@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import authService from '../services/authService';
 import './ForgetPassword.css';
-import illustration from './assets/illustration.png';
+import illustration from '../Images/password.jpeg';
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
@@ -28,12 +28,7 @@ const ForgetPassword = () => {
         toast.success('OTP sent successfully!');
         localStorage.setItem('resetEmail', email);
         setTimeout(() => {
-          navigate('/Authentication/OtpVerification', { 
-            state: { 
-              email,
-              isPasswordReset: true 
-            }
-          });
+         navigate('/Authentication/OtpVerification', { state: { email, isPasswordReset: true } });
         }, 2000);
       } else {
         toast.error(response.message || 'Failed to send OTP');
