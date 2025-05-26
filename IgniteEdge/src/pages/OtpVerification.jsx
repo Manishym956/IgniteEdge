@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './OtpVerification.css';
-import Illustration from './assets/illustration.jpeg';
+import Illustration from '../Images/otp.jpeg';
 
 const OtpVerification = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
@@ -76,6 +79,7 @@ const OtpVerification = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setMessage('OTP verified successfully!');
+      navigate('/Authentication/reset-password', { state: { email: location.state.email } });
     }, 1500);
   };
 

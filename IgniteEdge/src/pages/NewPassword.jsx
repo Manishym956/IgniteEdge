@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import authService from '../services/authService';
 import './NewPassword.css';
+import illustration from '../Images/newpass.jpeg';
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -14,14 +15,15 @@ const NewPassword = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const location = useLocation();
+  const { email, resetToken } = location.state || {};
+
   useEffect(() => {
-    const email = localStorage.getItem('resetEmail');
-    const otp = localStorage.getItem('resetOtp');
-    if (!email || !otp) {
-      toast.error('Missing reset information');
-      navigate('/forgot-password');
-    }
-  }, [navigate]);
+  if (!email || !resetToken) {
+    toast.error('Missing reset information');
+    navigate('/forgot-password');
+  }
+}, [email, resetToken, navigate]);
 
   const validatePassword = (password) => {
     if (password.length < 6) return 'Password must be at least 6 characters';

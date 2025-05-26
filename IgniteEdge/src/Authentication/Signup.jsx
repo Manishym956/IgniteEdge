@@ -107,13 +107,6 @@ const SignupPage = () => {
         <div className="form-container">
           <h1>Sign-Up</h1><br></br>
           <div className="social-buttons">
-            <button className="google-btn">
-              <img src={googleIcon} alt="Google icon" />
-              SignIn With Google
-            </button>
-          </div>
-          <div className="divider">
-            <span>-OR-</span>
           </div>
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="form-group">
@@ -139,20 +132,20 @@ const SignupPage = () => {
               {errors.email && <span className="error-message">{errors.email}</span>}
             </div>
             <div className="form-group">
-              <input 
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Password"
-                className="form-input"
+               <input 
+                type={showPassword ? "text" : "password"}
+                name="password" 
+                placeholder="Password" 
+                className={`form-input ${errors.password ? 'error' : ''}`}
                 value={formData.password}
-                onChange={handleChange}
+                onChange={handleChange} 
               />
               <button 
-                type="button" 
-                className="toggle-password-btn" 
+                type="button"
+                className="toggle-password"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? 'Hide' : 'Show'}
+                {showPassword ? '👁️' : '👁️‍🗨️'}
               </button>
               {errors.password && <span className="error-message">{errors.password}</span>}
             </div>

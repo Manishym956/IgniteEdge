@@ -5,6 +5,9 @@ import "dotenv/config";
 import connectDB from './config/mongodb.js';
 import authRouter from './routes/authRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import employeeRouter from './routes/employeeRoutes.js';
+import financeRoutes from './routes/finance.routes.js';
+import profitLossRoutes from './routes/profitLossRoutes.js';
 const app = express();
 const port = process.env.PORT || 1600;
 connectDB();
@@ -25,6 +28,15 @@ app.use(cookieparser());
 app.get('/', (req,res)=>res.send('API is running'));
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
+app.use('/api/employees', employeeRouter);
+app.use('/api/finance', financeRoutes);
+app.use('/api/profitloss', profitLossRoutes);
+
+// Health check route
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "Server is running" });
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
