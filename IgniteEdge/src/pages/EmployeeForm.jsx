@@ -15,7 +15,7 @@ const EmployeeForm = ({ fetchEmployees }) => {
     Object.keys(form).forEach(key => data.append(key, form[key]));
     if (file) data.append("profileImage", file);
 
-    await axios.post("http://localhost:5000/api/employees", data);
+    await axios.post("http://localhost:1600/employees", data);
     fetchEmployees();
   };
 
