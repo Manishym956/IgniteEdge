@@ -5,8 +5,12 @@ import {
   updateFinance,
   deleteFinance,
 } from "../controllers/finance.controller.js";
+import userAuth from "../middleware/userAuth.js";
 
 const router = express.Router();
+
+// Add authentication middleware to all routes
+router.use(userAuth);
 
 router.get("/", getFinance);
 router.post("/", createFinance);
