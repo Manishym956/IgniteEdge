@@ -1,4 +1,4 @@
-import { Home, Users, Clipboard, Settings, LogOut } from 'lucide-react';
+import { Home, Users, Clipboard, Settings, LogOut, User } from 'lucide-react';
 import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -29,7 +29,9 @@ export default function Dashboard() {
     <div className="dashboard">
       <div className="sidebar">
         <div className="section">
-          <div className="avatar">J</div>
+          <div className="avatar" style={{ cursor: 'pointer' }} onClick={() => navigate('/Profile')}>
+            <User size={32} />
+          </div>
           <span className="name">John Doe</span>
         </div>
 

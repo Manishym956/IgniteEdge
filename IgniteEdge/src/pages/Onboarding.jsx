@@ -45,7 +45,22 @@ const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted');
+    // Gather all form data
+    const form = e.target;
+    const onboardingData = {
+      companyName: form.companyName.value,
+      industryType: form.industryType.value,
+      yearEstablished: form.yearEstablished.value,
+      hqLocation: form.hqLocation.value,
+      roleInCompany: selectedRole,
+      teamMembers,
+      costPerUnit: form.costPerUnit.value,
+      manufacturing: form.manufacturing.value,
+      labourCost: form.labourCost.value,
+      burnRate: form.burnRate.value,
+      employeeCount: form.employeeCount.value,
+    };
+    localStorage.setItem('onboardingData', JSON.stringify(onboardingData));
     navigate('/Dashboard');
   };
 
