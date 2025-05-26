@@ -3,6 +3,9 @@ import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import React from 'react';
+import Modal from 'react-modal';
+import RevenueSection from "../components/RevenueSection.jsx";
+import ProfitLossSection from "../components/ProfitLossSection.jsx";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -41,31 +44,16 @@ export default function Dashboard() {
 
       <div className="main-content">
         <div className="dashboard-grid">
-          <div className="dashboard-box">
-            <h2 className="box-header">Card 1</h2>
-            <p>This is the first card content.</p>
-          </div>
+  <div className="dashboard-box">
+    <h2 className="box-header">Revenue</h2>
+    <RevenueSection />
+  </div>
 
-          <div className="dashboard-box">
-            <h2 className="box-header">Card 2</h2>
-            <p>This is the second card content.</p>
-          </div>
-
-          <div className="dashboard-box">
-            <h2 className="box-header">Card 3</h2>
-            <p>This is the third card content.</p>
-          </div>
-
-          <div className="dashboard-box">
-            <h2 className="box-header">Card 4</h2>
-            <p>This is the fourth card content.</p>
-          </div>
-
-          <div className="dashboard-box">
-            <h2 className="box-header">Card 5</h2>
-            <p>This is the fifth card content.</p>
-          </div>
-        </div>
+  <div className="dashboard-box">
+    <h2 className="box-header">Profit & Loss</h2>
+    <ProfitLossSection />
+  </div>
+</div>
       </div>
     </div>
   );
@@ -83,3 +71,5 @@ function NavItem({ icon, text, active, onClick }) {
     </div>
   );
 }
+
+Modal.setAppElement('#root');
