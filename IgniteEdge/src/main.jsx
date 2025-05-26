@@ -14,6 +14,7 @@ import EmployeeList from './pages/EmployeeList';
 import AddEditEmployee from './pages/AddEditEmployee';
 import { useEffect, useState } from 'react';
 import authService from './services/authService';
+import Profile from './pages/Profile';
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -79,6 +80,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/edit/:id" element={
           <ProtectedRoute>
             <AddEditEmployee />
+          </ProtectedRoute>
+        } />
+        <Route path="/Profile" element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         } />
       </Routes>
