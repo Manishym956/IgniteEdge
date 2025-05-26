@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Manishym956/IgniteEdge/issues"
   },
-  "homepage": "https://github.com/Manishym956/IgniteEdge#readme"
+  "homepage": "https://github.com/Manishym956/IgniteEdge#readme",
+  "dependencies": {
+    "react-beautiful-dnd": "^13.1.1"
+  }
 }
