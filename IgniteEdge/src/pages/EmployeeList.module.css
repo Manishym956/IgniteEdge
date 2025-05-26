@@ -1,40 +1,98 @@
 .employeeList {
-  padding: 2rem 0;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  min-height: 100vh;
 }
 
-.header {
+.topBar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.backButton {
+  background: #fff;
+  color: #3498db;
+  border: 1px solid #3498db;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 1px 4px rgba(52, 152, 219, 0.08);
+}
+
+.backButton:hover {
+  background: #3498db;
+  color: #fff;
+}
+
+.pageTitle {
+  flex: 1;
+  text-align: center;
+  font-size: 1.7rem;
+  color: #2c3e50;
+  font-weight: 600;
+  margin: 0;
 }
 
 .addButton {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(52, 152, 219, 0.08);
+}
+
+.addButton:hover {
+  background-color: #2980b9;
+}
+
+.tableCard {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 1.5rem 1rem;
+  margin-top: 1.5rem;
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
-  background-color: var(--card-color);
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .table th,
 .table td {
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   text-align: left;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid #edf2f7;
 }
 
 .table th {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: #f8fafc;
+  color: #4a5568;
   font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
 }
 
 .table tr:last-child td {
@@ -42,12 +100,91 @@
 }
 
 .table tr:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: #f8fafc;
 }
 
 .actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
+}
+
+.actions button,
+.actions a {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.actions .btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.actions .btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.actions .btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.actions .btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status.active {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+}
+
+.status.inactive {
+  background-color: #fbe9e7;
+  color: #d32f2f;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.emptyState p {
+  color: #718096;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  padding: 1rem;
+  background-color: #fbe9e7;
+  border-radius: 8px;
+  margin: 1rem 0;
 }
 
 .avatar {
@@ -56,38 +193,6 @@
   border-radius: 50%;
   object-fit: cover;
   background-color: #e0e0e0;
-}
-
-.status {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.statusActive {
-  background-color: rgba(76, 175, 80, 0.1);
-  color: var(--success-color);
-}
-
-.statusInactive {
-  background-color: rgba(244, 67, 54, 0.1);
-  color: var(--error-color);
-}
-
-.emptyState {
-  text-align: center;
-  padding: 3rem;
-  background-color: var(--card-color);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.emptyStateIcon {
-  font-size: 3rem;
-  color: var(--text-light);
-  margin-bottom: 1rem;
 }
 
 .searchBar {

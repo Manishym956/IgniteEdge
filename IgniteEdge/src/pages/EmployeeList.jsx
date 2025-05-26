@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { employeeService } from "../services/api"
 import styles from "./EmployeeList.module.css"
 import SearchPanel from "./SearchPanel"
@@ -13,6 +13,7 @@ const EmployeeList = () => {
   const [error, setError] = useState(null)
   const [refreshKey, setRefreshKey] = useState(0)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (location.state?.refresh) {
@@ -88,59 +89,63 @@ const EmployeeList = () => {
 
   return (
     <div className={styles.employeeList}>
-      <SearchPanel onSearch={handleSearch} onClear={handleClear} />
-      
-      <div className={styles.header}>
-        <h2>Employee List</h2>
-        <Link to="/add" className={`${styles.addButton} btn btn-primary`}>
-          Add New Employee
+      <div className={styles.topBar}>
+        <button className={styles.backButton} onClick={() => navigate('/Dashboard')}>
+          ← Back to Dashboard
+        </button>
+        <h2 className={styles.pageTitle}>Employee List</h2>
+        <Link to="/add" className={styles.addButton}>
+          + Add New Employee
         </Link>
       </div>
-
+      <SearchPanel onSearch={handleSearch} onClear={handleClear} />
+      
       {filteredEmployees.length === 0 ? (
         <div className={styles.emptyState}>
           <p>No employees found matching your search criteria.</p>
         </div>
       ) : (
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Department</th>
-              <th>Position</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredEmployees.map((employee) => (
-              <tr key={employee._id}>
-                <td>{employee.name}</td>
-                <td>{employee.department}</td>
-                <td>{employee.position}</td>
-                <td>
-                  <span className={`status ${employee.status}`}>
-                    {employee.status}
-                  </span>
-                </td>
-                <td className={styles.actions}>
-                  <Link
-                    to={`/edit/${employee._id}`}
-                    className="btn btn-primary"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(employee._id)}
-                    className="btn btn-danger"
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className={styles.tableCard}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredEmployees.map((employee) => (
+                <tr key={employee._id}>
+                  <td>{employee.name}</td>
+                  <td>{employee.department}</td>
+                  <td>{employee.position}</td>
+                  <td>
+                    <span className={`${styles.status} ${styles[employee.status.toLowerCase()]}`}>
+                      {employee.status}
+                    </span>
+                  </td>
+                  <td className={styles.actions}>
+                    <Link
+                      to={`/edit/${employee._id}`}
+                      className={styles['btn-primary']}
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(employee._id)}
+                      className={styles['btn-danger']}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   )
