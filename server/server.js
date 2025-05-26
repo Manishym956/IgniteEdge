@@ -8,6 +8,9 @@ import userRouter from './routes/userRoutes.js';
 import employeeRouter from './routes/employeeRoutes.js';
 import financeRoutes from './routes/finance.routes.js';
 import profitLossRoutes from './routes/profitLossRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
+import taskRoutes from './routes/taskRoutes.js';
+import automationRoutes from './routes/automationRoutes.js';
 const app = express();
 const port = process.env.PORT || 1600;
 connectDB();
@@ -31,6 +34,9 @@ app.use('/api/user', userRouter)
 app.use('/api/employees', employeeRouter);
 app.use('/api/finance', financeRoutes);
 app.use('/api/profitloss', profitLossRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/automations', automationRoutes);
 
 // Health check route
 app.get("/api/health", (req, res) => {
