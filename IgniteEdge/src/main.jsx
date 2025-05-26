@@ -15,6 +15,8 @@ import AddEditEmployee from './pages/AddEditEmployee';
 import { useEffect, useState } from 'react';
 import authService from './services/authService';
 import Profile from './pages/Profile';
+import ProjectList from './pages/ProjectList';
+import ProjectDetail from './pages/ProjectDetail';
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -85,6 +87,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/Profile" element={
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        } />
+        <Route path="/projects" element={
+          <ProtectedRoute>
+            <ProjectList />
+          </ProtectedRoute>
+        } />
+        <Route path="/projects/:id" element={
+          <ProtectedRoute>
+            <ProjectDetail />
           </ProtectedRoute>
         } />
       </Routes>
