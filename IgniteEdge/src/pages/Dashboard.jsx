@@ -25,6 +25,8 @@ export default function Dashboard() {
     }
   };
 
+  const userName = localStorage.getItem('userName') || 'User';
+
   return (
     <div className="dashboard">
       <div className="sidebar">
@@ -32,14 +34,14 @@ export default function Dashboard() {
           <div className="avatar" style={{ cursor: 'pointer' }} onClick={() => navigate('/Profile')}>
             <User size={32} />
           </div>
-          <span className="name">John Doe</span>
+          <span className="name">{userName}</span>
         </div>
 
         <nav className="nav">
           <NavItem icon={<Home size={20} />} text="Home" active />
           <NavItem icon={<Users size={20} />} text="Employee" onClick={() => navigate('/EmployeeList')}/>
           <NavItem icon={<Clipboard size={20} />} text="Task Management" onClick={() => navigate('/projects')} />
-          <NavItem icon={<Settings size={20} />} text="Settings" />
+          <NavItem icon={<Settings size={20} />} text="Settings" onClick={() => navigate('/Settings')} />
           <NavItem icon={<LogOut size={20} />} text="Logout" onClick={handleLogout} />
         </nav>
       </div>

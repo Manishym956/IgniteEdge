@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import authService from '../services/authService';
 import './OtpVerification.css';
 
-export const OtpVerification = () => {
+const OtpVerificationReset = () => {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
@@ -13,13 +13,13 @@ export const OtpVerification = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!location.state?.userId || !location.state?.email) {
-      toast.error('Missing verification details');
-      navigate('/Authentication/Signup');
+    if (!location.state?.email) {
+      toast.error('Missing email details');
+      navigate('/forgot-password');
     }
   }, []);
 
-  const { userId, email } = location.state || {};
+  const { email } = location.state || {};
 
   useEffect(() => {
     let timer;
@@ -69,17 +69,10 @@ export const OtpVerification = () => {
 
     setLoading(true);
     try {
-      const response = await authService.verifyEmail(userId, otpString);
-      if (response.success) {
-        toast.success('Email verified successfully!');
-        localStorage.removeItem('tempUserId');
-        localStorage.removeItem('tempEmail');
-        localStorage.setItem('onboardingComplete', 'false');
-        setTimeout(() => navigate('/Onboarding'), 2000);
-      } else {
-        toast.error(response.message || 'Invalid OTP');
-        setOtp(['', '', '', '', '', '']);
-      }
+      // Store OTP in localStorage for password reset
+      localStorage.setItem('resetOtp', otpString);
+      toast.success('OTP verified successfully!');
+      setTimeout(() => navigate('/Authentication/reset-password', { state: { email } }), 2000);
     } catch (error) {
       console.error('Verification error:', error);
       toast.error('Verification failed. Please try again.');
@@ -94,7 +87,7 @@ export const OtpVerification = () => {
 
     setResendLoading(true);
     try {
-      const response = await authService.sendVerifyOtp(userId);
+      const response = await authService.sendResetOtp(email);
       if (response.success) {
         toast.success('New OTP sent successfully');
         setResendTimer(30);
@@ -114,7 +107,7 @@ export const OtpVerification = () => {
     <div className="otp-container">
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="otp-card">
-        <h2>Verify Your Email</h2>
+        <h2>Verify OTP</h2>
         <p>Please enter the 6-digit code sent to {email}</p>
 
         <form onSubmit={handleVerify}>
@@ -139,7 +132,7 @@ export const OtpVerification = () => {
             className={`verify-btn ${loading ? 'loading' : ''}`}
             disabled={loading || otp.join('').length !== 6}
           >
-            {loading ? 'Verifying...' : 'Verify Email'}
+            {loading ? 'Verifying...' : 'Verify OTP'}
           </button>
         </form>
 
@@ -161,4 +154,4 @@ export const OtpVerification = () => {
   );
 };
 
-export default OtpVerification;
+export default OtpVerificationReset;

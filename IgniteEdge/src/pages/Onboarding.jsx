@@ -61,6 +61,7 @@ const navigate = useNavigate();
       employeeCount: form.employeeCount.value,
     };
     localStorage.setItem('onboardingData', JSON.stringify(onboardingData));
+    localStorage.setItem('onboardingComplete', 'true');
     navigate('/Dashboard');
   };
 
