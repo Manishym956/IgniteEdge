@@ -24,13 +24,16 @@ const RevenueSection = () => {
   };
 
   return (
-    <div className="genz-chart-card">
-      <div className="genz-chart-header">
+    <>
+      <div className="genz-chart-header" style={{ marginBottom: 0 }}>
+        <h2 className="box-header" style={{ margin: 0 }}>Revenue</h2>
         <button className="genz-submit-btn" style={{marginLeft: 'auto'}} onClick={() => setIsModalOpen(true)}>+ Add Entry</button>
       </div>
-      <RevenueChart data={financeData} />
-      <InputModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleCreate} />
-    </div>
+      <div className="genz-chart-card">
+        <RevenueChart data={financeData} />
+        <InputModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleCreate} />
+      </div>
+    </>
   );
 };
 

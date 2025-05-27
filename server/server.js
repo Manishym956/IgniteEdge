@@ -11,6 +11,12 @@ import profitLossRoutes from './routes/profitLossRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
 import automationRoutes from './routes/automationRoutes.js';
+import expenseRoutes from './routes/expenseRoutes.js';
+import departmentPerformanceRoutes from './routes/departmentPerformanceRoutes.js';
+import projectTimeAllocationRoutes from './routes/projectTimeAllocationRoutes.js';
+import kpiTrendRoutes from './routes/kpiTrendRoutes.js';
+import geoDistributionRoutes from './routes/geoDistributionRoutes.js';
+import reminderRoutes from './routes/reminderRoutes.js';
 const app = express();
 const port = process.env.PORT || 1600;
 connectDB();
@@ -20,7 +26,7 @@ connectDB();
 app.use(cors({
   origin: 'http://localhost:5173', 
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
@@ -37,6 +43,12 @@ app.use('/api/profitloss', profitLossRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/automations', automationRoutes);
+app.use('/api/expenses', expenseRoutes);
+app.use('/api/department-performance', departmentPerformanceRoutes);
+app.use('/api/project-time-allocation', projectTimeAllocationRoutes);
+app.use('/api/kpi-trends', kpiTrendRoutes);
+app.use('/api/geo-distribution', geoDistributionRoutes);
+app.use('/api/reminders', reminderRoutes);
 
 // Health check route
 app.get("/api/health", (req, res) => {
