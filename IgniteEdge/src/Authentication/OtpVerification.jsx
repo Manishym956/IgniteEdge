@@ -74,6 +74,7 @@ export const OtpVerification = () => {
         toast.success('Email verified successfully!');
         localStorage.removeItem('tempUserId');
         localStorage.removeItem('tempEmail');
+        localStorage.setItem('onboardingComplete', 'false');
         setTimeout(() => navigate('/Onboarding'), 2000);
       } else {
         toast.error(response.message || 'Invalid OTP');
