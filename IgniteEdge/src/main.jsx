@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import SignupPage from './Authentication/Signup';
 import LoginPage from './Authentication/Login';
-import OtpVerification from './pages/OtpVerification';
+import OtpVerification from './Authentication/OtpVerification';
 import ForgetPassword from './pages/ForgetPassword';
 import NewPassword from './pages/NewPassword';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
