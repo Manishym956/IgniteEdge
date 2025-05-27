@@ -64,20 +64,23 @@ const ProfitLossSection = () => {
   };
 
   return (
-    <div className="genz-chart-card">
-      <div className="genz-chart-header">
+    <>
+      <div className="genz-chart-header" style={{ marginBottom: 0 }}>
+        <h2 className="box-header" style={{ margin: 0 }}>Profit & Loss</h2>
         <button className="genz-submit-btn" style={{marginLeft: 'auto'}} onClick={handleAddClick}>+ Add Entry</button>
       </div>
-      {/* Show chart */}
-      <ProfitLossChart records={profitLossData} />
-      {/* Pass editingRecord for modal to prefill inputs on edit */}
-      <ProfitLossForm
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSave={handleSubmit}
-        initialData={editingRecord}
-      />
-    </div>
+      <div className="genz-chart-card">
+        {/* Show chart */}
+        <ProfitLossChart records={profitLossData} />
+        {/* Pass editingRecord for modal to prefill inputs on edit */}
+        <ProfitLossForm
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSubmit}
+          initialData={editingRecord}
+        />
+      </div>
+    </>
   );
 };
 

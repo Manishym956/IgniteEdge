@@ -1,0 +1,128 @@
+/* Outer wrapper to center the card and match dashboard grid width */
+.reminderbar-outer-wrapper {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Card layout: flex row for calendar and reminders, match dashboard card width */
+.reminderbar-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+  border-radius: 16px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reminderbar-calendar-wrapper {
+  margin-left: 24px;
+}
+
+.reminderbar-list-wrapper {
+  flex: 1;
+}
+
+.reminderbar-header-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reminderbar-title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.reminderbar-add-btn {
+  margin-left: auto;
+}
+
+.reminderbar-loading {}
+
+.reminderbar-error {
+  color: red;
+}
+
+.reminderbar-empty {}
+
+.reminderbar-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.reminderbar-list-item {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+}
+
+.reminderbar-list-item-notified {
+  background: #e0e7ff;
+}
+
+.reminderbar-list-item-pending {
+  background: #facc15;
+}
+
+.reminderbar-message {
+  flex: 1;
+}
+
+.reminderbar-done-btn {
+  margin-left: 12px;
+}
+
+.reminderbar-modal-btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.reminderbar-notification {
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  background: #facc15;
+  color: #333;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reminderbar-notification-dismiss {
+  background: none;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  color: #333;
+  margin-left: 8px;
+}
+
+@media (max-width: 900px) {
+  .reminderbar-card {
+    flex-direction: column;
+    gap: 16px;
+    max-width: 100vw;
+    width: 100%;
+  }
+  .reminderbar-calendar-wrapper {
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+} 

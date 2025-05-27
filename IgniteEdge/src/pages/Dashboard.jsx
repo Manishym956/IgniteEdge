@@ -6,6 +6,12 @@ import React from 'react';
 import Modal from 'react-modal';
 import RevenueSection from "../components/RevenueSection.jsx";
 import ProfitLossSection from "../components/ProfitLossSection.jsx";
+import ExpenseSection from "../components/ExpenseSection.jsx";
+import DepartmentPerformanceSection from "../components/DepartmentPerformanceSection.jsx";
+import ProjectTimeAllocationSection from "../components/ProjectTimeAllocationSection.jsx";
+import KPITrendsSection from "../components/KPITrendsSection.jsx";
+import GeoDistributionSection from "../components/GeoDistributionSection.jsx";
+import ReminderBar from "../components/ReminderBar.jsx";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -46,18 +52,33 @@ export default function Dashboard() {
         </nav>
       </div>
 
-      <div className="main-content">
-        <div className="dashboard-grid">
-  <div className="dashboard-box">
-    <h2 className="box-header">Revenue</h2>
-    <RevenueSection />
-  </div>
-
-  <div className="dashboard-box">
-    <h2 className="box-header">Profit & Loss</h2>
-    <ProfitLossSection />
-  </div>
-</div>
+      <div style={{ flex: 1 }}>
+        <ReminderBar />
+        <div className="main-content">
+          <div className="dashboard-grid">
+            <div className="dashboard-box">
+              <RevenueSection />
+            </div>
+            <div className="dashboard-box">
+              <ProfitLossSection />
+            </div>
+            <div className="dashboard-box">
+              <ExpenseSection />
+            </div>
+            <div className="dashboard-box">
+              <DepartmentPerformanceSection />
+            </div>
+            <div className="dashboard-box">
+              <KPITrendsSection />
+            </div>
+            <div className="dashboard-box">
+              <GeoDistributionSection />
+            </div>
+            <div className="dashboard-box full-width">
+              <ProjectTimeAllocationSection />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
