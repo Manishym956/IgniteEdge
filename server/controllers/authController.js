@@ -190,3 +190,28 @@ export const resetPassword=async(req,res)=>{
         res.json({success:false,message:error.message});
     }
 }
+
+export const getUserSettings = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.user.id).select('settings name email');
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+        res.json({ success: true, settings: user.settings, name: user.name, email: user.email });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const updateUserSettings = async (req, res) => {
+    try {
+        const { settings, name, email } = req.body;
+        const user = await userModel.findById(req.user.id);
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+        if (settings) user.settings = { ...user.settings, ...settings };
+        if (name) user.name = name;
+        if (email) user.email = email;
+        await user.save();
+        res.json({ success: true, settings: user.settings, name: user.name, email: user.email });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};

@@ -41,7 +41,7 @@ export default function Dashboard() {
           <NavItem icon={<Home size={20} />} text="Home" active />
           <NavItem icon={<Users size={20} />} text="Employee" onClick={() => navigate('/EmployeeList')}/>
           <NavItem icon={<Clipboard size={20} />} text="Task Management" onClick={() => navigate('/projects')} />
-          <NavItem icon={<Settings size={20} />} text="Settings" />
+          <NavItem icon={<Settings size={20} />} text="Settings" onClick={() => navigate('/Settings')} />
           <NavItem icon={<LogOut size={20} />} text="Logout" onClick={handleLogout} />
         </nav>
       </div>
