@@ -15,6 +15,62 @@ body {
   min-height: 100vh;
 }
 
+body.dark .onboarding-container {
+  background-color: #18181b;
+}
+body.dark .onboarding-content {
+  background-color: #23232a;
+  color: #e0e7ff;
+  box-shadow: 0 4px 20px rgba(30, 41, 59, 0.18);
+}
+body.dark .onboarding-illustration {
+  background-color: #23232a;
+}
+body.dark .onboarding-heading h1 {
+  color: #60a5fa;
+}
+body.dark .onboarding-heading p {
+  color: #a5b4fc;
+}
+body.dark .onboarding-form {
+  background-color: #23232a;
+}
+body.dark .form-section {
+  background-color: #18181b;
+}
+body.dark label {
+  color: #cbd5e1;
+}
+body.dark input[type="text"],
+body.dark input[type="email"],
+body.dark select {
+  background-color: #2d2d36;
+  color: #e0e7ff;
+  border: 1px solid #334155;
+}
+body.dark input[type="text"]:focus,
+body.dark input[type="email"]:focus,
+body.dark select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #6366f1;
+}
+body.dark .add-team-member-btn {
+  color: #60a5fa;
+}
+body.dark .remove-btn {
+  color: #a5b4fc;
+}
+body.dark .remove-btn:hover {
+  color: #ef4444;
+}
+body.dark .submit-btn {
+  background-color: #6366f1;
+  color: #fff;
+}
+body.dark .submit-btn:hover {
+  background-color: #3b82f6;
+}
+
 .onboarding-container {
   display: flex;
   justify-content: center;

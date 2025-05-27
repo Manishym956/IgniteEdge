@@ -1,6 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import '../styles/Settings.css';
 import axios from 'axios';
+
+// Utility to set theme globally
+function setTheme(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.body.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }
+}
 
 const Settings = () => {
   const [settings, setSettings] = useState({ darkMode: false, notifications: true, language: 'en' });
@@ -12,6 +23,9 @@ const Settings = () => {
 
   useEffect(() => {
     fetchSettings();
+    // Apply theme on mount
+    const theme = localStorage.getItem('theme');
+    setTheme(theme === 'dark');
   }, []);
 
   const fetchSettings = async () => {
@@ -29,6 +43,7 @@ const Settings = () => {
 
   const handleSettingsChange = (field, value) => {
     setSettings((prev) => ({ ...prev, [field]: value }));
+    if (field === 'darkMode') setTheme(value);
   };
 
   const handleSave = async () => {
@@ -90,7 +105,10 @@ const Settings = () => {
       </div>
       <div className="settings-section settings-toggle-row">
         <label className="settings-label">Dark Mode</label>
-        <input type="checkbox" checked={settings.darkMode} onChange={e => handleSettingsChange('darkMode', e.target.checked)} />
+        <label className="switch">
+          <input type="checkbox" checked={settings.darkMode} onChange={e => handleSettingsChange('darkMode', e.target.checked)} />
+          <span className="slider round"></span>
+        </label>
       </div>
       <div className="settings-section settings-toggle-row">
         <label className="settings-label">Notifications</label>
