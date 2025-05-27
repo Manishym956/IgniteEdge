@@ -25,6 +25,8 @@ export default function Dashboard() {
     }
   };
 
+  const userName = localStorage.getItem('userName') || 'User';
+
   return (
     <div className="dashboard">
       <div className="sidebar">
@@ -32,7 +34,7 @@ export default function Dashboard() {
           <div className="avatar" style={{ cursor: 'pointer' }} onClick={() => navigate('/Profile')}>
             <User size={32} />
           </div>
-          <span className="name">John Doe</span>
+          <span className="name">{userName}</span>
         </div>
 
         <nav className="nav">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../styles/genz-modal.css";
 import ChartCard from "./ChartCard.jsx";
 import InputModal from "./InputModal.jsx";
 import RevenueChart from "../charts/RevenueChart.jsx";
@@ -23,8 +24,10 @@ const RevenueSection = () => {
   };
 
   return (
-    <div>
-      <ChartCard title="Revenue vs. Expense" onClick={() => setIsModalOpen(true)} />
+    <div className="genz-chart-card">
+      <div className="genz-chart-header">
+        <button className="genz-submit-btn" style={{marginLeft: 'auto'}} onClick={() => setIsModalOpen(true)}>+ Add Entry</button>
+      </div>
       <RevenueChart data={financeData} />
       <InputModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleCreate} />
     </div>

@@ -35,7 +35,17 @@ const LoginPage = () => {
       const response = await authService.login(formData.email, formData.password);
       if (response.success) {
         toast.success('Login successful!');
-        setTimeout(() => navigate('/onboarding'), 1500);
+        // Store user name for dashboard
+        if (response.user && response.user.name) {
+          localStorage.setItem('userName', response.user.name);
+        }
+        setTimeout(() => {
+          if (localStorage.getItem('onboardingComplete') === 'true') {
+            navigate('/Dashboard');
+          } else {
+            navigate('/Onboarding');
+          }
+        }, 1500);
       } else {
         toast.error(response.message || 'Login failed');
       }
