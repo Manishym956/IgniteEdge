@@ -266,3 +266,33 @@
   .table th, .table td { padding: 0.8rem 0.5rem; }
   .pageTitle { font-size: 1.5rem; }
 }
+
+.topBarActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.downloadButton {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.downloadButton:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.downloadButton:active {
+  transform: translateY(0);
+}

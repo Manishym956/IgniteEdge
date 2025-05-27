@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { employeeService } from "../services/api"
 import styles from "./EmployeeList.module.css"
+import { jsPDF } from "jspdf"
+import autoTable from 'jspdf-autotable'
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([])
@@ -106,6 +108,50 @@ const EmployeeList = () => {
     }
   }
 
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF()
+    
+    // Add title
+    doc.setFontSize(20)
+    doc.text('Employee List', 14, 15)
+    
+    // Add date
+    doc.setFontSize(10)
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22)
+    
+    // Create table
+    const tableColumn = ['Name', 'Department', 'Position', 'Status']
+    const tableRows = filteredEmployees.map(employee => [
+      employee.name,
+      employee.department || 'N/A',
+      employee.position || 'N/A',
+      employee.status
+    ])
+    
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 30,
+      theme: 'grid',
+      styles: {
+        fontSize: 8,
+        cellPadding: 2,
+      },
+      headStyles: {
+        fillColor: [21, 47, 109],
+        textColor: 255,
+        fontSize: 10,
+        fontStyle: 'bold',
+      },
+      alternateRowStyles: {
+        fillColor: [245, 245, 245],
+      },
+    })
+    
+    // Save the PDF
+    doc.save('employee-list.pdf')
+  }
+
   if (loading) {
     return (
       <div className={styles.loading}>
@@ -125,9 +171,14 @@ const EmployeeList = () => {
           Back to Dashboard
         </button>
         <h2 className={styles.pageTitle}>Employee List</h2>
-        <Link to="/add" className={styles.addButton}>
-          Add New Employee
-        </Link>
+        <div className={styles.topBarActions}>
+          <button className={styles.downloadButton} onClick={handleDownloadPDF}>
+            Download PDF
+          </button>
+          <Link to="/add" className={styles.addButton}>
+            Add New Employee
+          </Link>
+        </div>
       </div>
       
       {/* Simple Search Panel without icons */}

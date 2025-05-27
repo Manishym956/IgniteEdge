@@ -247,3 +247,95 @@ export const changePassword = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
+// Team Roles Management
+export const getTeamRoles = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id);
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+    
+    // Get all users with their roles
+    const teamRoles = await userModel.find(
+      { role: { $exists: true } },
+      { email: 1, role: 1, _id: 1 }
+    );
+    
+    res.json({ success: true, roles: teamRoles });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const addTeamRole = async (req, res) => {
+  try {
+    const { email, designation } = req.body;
+    
+    // Validate role designation
+    const validRoles = ['teamLead', 'projectManager', 'hr'];
+    if (!validRoles.includes(designation)) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Invalid role designation' 
+      });
+    }
+
+    // Find user by email
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'User not found' 
+      });
+    }
+
+    // Update user's role
+    user.role = designation;
+    await user.save();
+
+    res.json({ success: true, message: 'Role updated successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const removeTeamRole = async (req, res) => {
+  try {
+    const { roleId } = req.params;
+    
+    const user = await userModel.findById(roleId);
+    if (!user) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'User not found' 
+      });
+    }
+
+    // Remove role
+    user.role = undefined;
+    await user.save();
+
+    // Send email notification
+    try {
+      await sendMail({
+        to: user.email,
+        subject: 'Your Role Has Been Removed',
+        text: 'Your role has been removed from the system.',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #2563eb;">Role Removal Notification</h2>
+            <p>Hello,</p>
+            <p>Your role has been removed from the system.</p>
+            <p>If you believe this is an error, please contact your administrator.</p>
+            <p>Best regards,<br>The IgniteEdge Team</p>
+          </div>
+        `
+      });
+    } catch (mailErr) {
+      console.error('Failed to send role removal email:', mailErr);
+    }
+
+    res.json({ success: true, message: 'Role removed successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

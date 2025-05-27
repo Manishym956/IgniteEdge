@@ -107,7 +107,8 @@ const AddEditEmployee = () => {
         await employeeService.create(employeeData)
       }
 
-      navigate("/", { state: { refresh: true } })
+      // Change navigation to employee list page
+      navigate("/EmployeeList", { state: { refresh: true } })
     } catch (err) {
       setError("Failed to save employee. Please check your inputs and try again.")
       console.error(err)
