@@ -182,4 +182,48 @@ body.dark .settings-divider {
 body.dark .settings-message {
   background: #1e293b;
   color: #60a5fa;
+}
+
+/* Dark mode toggle switch styles */
+body.dark .slider {
+  background: #334155;
+}
+body.dark .slider:before {
+  background: #94a3b8;
+}
+body.dark input:checked + .slider {
+  background: linear-gradient(90deg, #6366f1 0%, #3b82f6 100%);
+}
+body.dark input:checked + .slider:before {
+  background: #fff;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.settings-back-btn {
+  padding: 0.5rem 1rem;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.settings-back-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.dark .settings-back-btn {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.dark .settings-back-btn:hover {
+  background-color: #3a3a3a;
 } 
