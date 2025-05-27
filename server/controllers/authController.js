@@ -15,23 +15,28 @@ export const register=async(req,res)=>{
         if(existingUser){
             return res.json({success:false,message:"User already exists"});
         }
-        const hasshedPassword=await bcrypt.hash(password,10);
+        const hashedPassword=await bcrypt.hash(password,10);
+        // Generate OTP
+        const otp=String(Math.floor(100000+Math.random()*900000));
+        const otpExpireAt=Date.now()+5*60*1000; // 5 minutes
         const user=new userModel({
             name,
             email,
-            password:hasshedPassword
+            password:hashedPassword,
+            isAccountVerified:false,
+            verifyOtp:otp,
+            verifyOtpExpireAt:otpExpireAt
         })
         await user.save();
-        const token =jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
-        res.cookie('token',token, {httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:process.env.NODE_ENV==='production'?'none':'strict',maxAge:7*24*60*60*1000});
+        // Send OTP email
         const mailOptions={
             from: process.env.SENDER_EMAIL,
             to: email,
-            subject: 'Welcome to IgniteEdge',
-            text: `Hello ${name},\n\nThank you for registering with IgniteEdge! You have registeresd through ${email} We are excited to have you on board.\n\nBest regards,\nThe IgniteEdge Team`,
+            subject: 'Verify your account',
+            text: `Hello ${name},\n\nYour OTP for account verification is ${otp}. It is valid for 5 minutes only.\n\nBest regards,\nThe IgniteEdge Team`,
         }
         await transporter.sendMail(mailOptions);
-        return res.json({success:true,message:"User registered successfully",user:{name:user.name,email:user.email}})
+        return res.json({success:true,message:"User registered. OTP sent to email.",user:{_id:user._id,name:user.name,email:user.email}})
     }catch(error){
         res.json({success:false,message:error.message})
     }
@@ -93,30 +98,33 @@ export const sendVerifyOtp=async(req,res)=>{
 
 export const verifyEmail=async(req,res)=>{
     const {userId,otp}=req.body;
-    if(!userId||!otp)
-{
-    return res.json({success})
-} 
-try{
-const user=await userModel.findById(userId);
-
-if(!user){
-    return res.json({success:false,message:"User not found"});
-}
-if(user.verifyOtp===''|| user.verifyOtp!==otp){
-return res.json({success:false,message:"Invalid OTP"});
-}
-if(user.verifyOtpExpireAt<Date.now()){
-    return res.json({success:false,message:"OTP expired"});
-}
-user.isAccountVerified=true;
-user.verifyOtp='';
-user.verifyOtpExpireAt=0;
-await user.save();
-return res.json({success:true,message:"Account verified successfully"});
-// if(user.isAccountVerified){
-//     return res.json({success:false,message:"Account already verified"});
-// }
+    if(!userId||!otp){
+        return res.json({success:false,message:"Missing details"})
+    }
+    try{
+        const user=await userModel.findById(userId);
+        if(!user){
+            return res.json({success:false,message:"User not found"});
+        }
+        if(user.verifyOtp===''|| user.verifyOtp!==otp){
+            return res.json({success:false,message:"Invalid OTP"});
+        }
+        if(user.verifyOtpExpireAt<Date.now()){
+            return res.json({success:false,message:"OTP expired"});
+        }
+        user.isAccountVerified=true;
+        user.verifyOtp='';
+        user.verifyOtpExpireAt=0;
+        await user.save();
+        // Send welcome email after verification
+        const mailOptions={
+            from: process.env.SENDER_EMAIL,
+            to: user.email,
+            subject: 'Welcome to IgniteEdge',
+            text: `Hello ${user.name},\n\nThank you for verifying your email and registering with IgniteEdge! We are excited to have you on board.\n\nBest regards,\nThe IgniteEdge Team`,
+        }
+        await transporter.sendMail(mailOptions);
+        return res.json({success:true,message:"Account verified successfully"});
     }catch(error){
         res.json({success:false,message:error.message});
     }

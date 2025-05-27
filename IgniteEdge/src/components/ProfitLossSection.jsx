@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../styles/genz-modal.css";
 import ChartCard from "./ChartCard.jsx";
 import ProfitLossForm from "./ProfitLossForm.jsx";
 import ProfitLossChart from "../charts/ProfitLossChart.jsx";
@@ -63,12 +64,12 @@ const ProfitLossSection = () => {
   };
 
   return (
-    <div>
-      <ChartCard title="Profit & Loss Summary" onClick={handleAddClick} />
-
+    <div className="genz-chart-card">
+      <div className="genz-chart-header">
+        <button className="genz-submit-btn" style={{marginLeft: 'auto'}} onClick={handleAddClick}>+ Add Entry</button>
+      </div>
       {/* Show chart */}
       <ProfitLossChart records={profitLossData} />
-
       {/* Pass editingRecord for modal to prefill inputs on edit */}
       <ProfitLossForm
         isOpen={isModalOpen}
@@ -76,21 +77,6 @@ const ProfitLossSection = () => {
         onSave={handleSubmit}
         initialData={editingRecord}
       />
-
-      {/* List with edit/delete buttons */}
-      <div style={{ marginTop: "20px" }}>
-        <h3>Records</h3>
-        {profitLossData.length === 0 && <p>No records yet.</p>}
-        <ul>
-          {profitLossData.map(record => (
-  <li key={record._id}>
-    <strong>{record.period}:</strong> Profit/Loss: {record.profitOrLoss}
-    <button onClick={() => handleEditClick(record)}>Edit</button>
-    <button onClick={() => handleDeleteClick(record._id)}>Delete</button>
-  </li>
-))}
-        </ul>
-      </div>
     </div>
   );
 };
