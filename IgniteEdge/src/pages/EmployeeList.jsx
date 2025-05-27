@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { employeeService } from "../services/api"
 import styles from "./EmployeeList.module.css"
-import SearchPanel from "./SearchPanel"
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([])
@@ -12,6 +11,12 @@ const EmployeeList = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [refreshKey, setRefreshKey] = useState(0)
+  const [searchParams, setSearchParams] = useState({
+    name: '',
+    department: '',
+    position: '',
+    status: ''
+  })
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -42,7 +47,7 @@ const EmployeeList = () => {
     }
   }
 
-  const handleSearch = (searchParams) => {
+  const handleSearch = () => {
     const filtered = employees.filter(employee => {
       return (
         (searchParams.name === '' || 
@@ -59,7 +64,33 @@ const EmployeeList = () => {
   }
 
   const handleClear = () => {
+    setSearchParams({
+      name: '',
+      department: '',
+      position: '',
+      status: ''
+    })
     setFilteredEmployees(employees)
+  }
+
+  const handleInputChange = (field, value) => {
+    const newParams = { ...searchParams, [field]: value }
+    setSearchParams(newParams)
+    
+    // Auto-filter as user types
+    const filtered = employees.filter(employee => {
+      return (
+        (newParams.name === '' || 
+          employee.name.toLowerCase().includes(newParams.name.toLowerCase())) &&
+        (newParams.department === '' || 
+          employee.department.toLowerCase().includes(newParams.department.toLowerCase())) &&
+        (newParams.position === '' || 
+          employee.position.toLowerCase().includes(newParams.position.toLowerCase())) &&
+        (newParams.status === '' || 
+          employee.status === newParams.status)
+      )
+    })
+    setFilteredEmployees(filtered)
   }
 
   const handleDelete = async (id) => {
@@ -78,7 +109,7 @@ const EmployeeList = () => {
   if (loading) {
     return (
       <div className={styles.loading}>
-        <div className="spinner"></div>
+        <div className={styles.spinner}></div>
       </div>
     )
   }
@@ -91,14 +122,53 @@ const EmployeeList = () => {
     <div className={styles.employeeList}>
       <div className={styles.topBar}>
         <button className={styles.backButton} onClick={() => navigate('/Dashboard')}>
-          ← Back to Dashboard
+          Back to Dashboard
         </button>
         <h2 className={styles.pageTitle}>Employee List</h2>
         <Link to="/add" className={styles.addButton}>
-          + Add New Employee
+          Add New Employee
         </Link>
       </div>
-      <SearchPanel onSearch={handleSearch} onClear={handleClear} />
+      
+      {/* Simple Search Panel without icons */}
+      <div className={styles.searchPanelWrapper}>
+        <h3 className={styles.searchPanelHeading}>Search Employees</h3>
+        <div className={styles.searchForm}>
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchParams.name}
+            onChange={(e) => handleInputChange('name', e.target.value)}
+            className={styles.searchInput}
+          />
+          <input
+            type="text"
+            placeholder="Department..."
+            value={searchParams.department}
+            onChange={(e) => handleInputChange('department', e.target.value)}
+            className={styles.searchInput}
+          />
+          <input
+            type="text"
+            placeholder="Position..."
+            value={searchParams.position}
+            onChange={(e) => handleInputChange('position', e.target.value)}
+            className={styles.searchInput}
+          />
+          <select
+            value={searchParams.status}
+            onChange={(e) => handleInputChange('status', e.target.value)}
+            className={styles.searchSelect}
+          >
+            <option value="">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <button onClick={handleClear} className={styles.clearButton}>
+            Clear
+          </button>
+        </div>
+      </div>
       
       {filteredEmployees.length === 0 ? (
         <div className={styles.emptyState}>
