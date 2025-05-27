@@ -7,6 +7,7 @@ import LoginPage from './Authentication/Login';
 import OtpVerification from './Authentication/OtpVerification';
 import ForgetPassword from './pages/ForgetPassword';
 import NewPassword from './pages/NewPassword';
+import OtpVerificationReset from './pages/OtpVerificationreset';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Onboarding from './pages/Onboarding';
@@ -69,6 +70,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/Authentication/forgot-password" element={<ForgetPassword />} />
         <Route path="/Authentication/reset-password" element={<NewPassword />} />
         <Route path="/Authentication/OtpVerification" element={<OtpVerification />} />
+        <Route path="/OtpVerificationreset" element={<OtpVerificationReset />} />
         <Route path="/forgot-password" element={<ForgetPassword />} />
         <Route path="/EmployeeList" element={
           <ProtectedRoute>
