@@ -41,121 +41,174 @@ const ProjectList = () => {
     }
   };
 
+  const buttonStyle = {
+    background: 'linear-gradient(90deg, #6366f1 0%, #2563eb 100%)',
+    color: '#fff',
+    border: 'none',
+    borderRadius: 8,
+    padding: '10px 20px',
+    fontWeight: 600,
+    cursor: 'pointer',
+    fontSize: 15,
+    boxShadow: '0 2px 8px rgba(99,102,241,0.10)',
+    transition: 'all 0.2s ease',
+    '&:hover': {
+      transform: 'translateY(-1px)',
+      boxShadow: '0 4px 12px rgba(99,102,241,0.20)'
+    }
+  };
+
+  const inputStyle = {
+    width: '100%',
+    marginBottom: 12,
+    padding: '12px 16px',
+    borderRadius: 8,
+    border: '1px solid #e2e8f0',
+    fontSize: 15,
+    transition: 'all 0.2s ease',
+    '&:focus': {
+      outline: 'none',
+      borderColor: '#6366f1',
+      boxShadow: '0 0 0 3px rgba(99,102,241,0.10)'
+    }
+  };
+
   return (
-    <div style={{ padding: 40 }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
+    <div style={{ 
+      padding: '40px',
+      maxWidth: '1200px',
+      margin: '0 auto',
+      background: '#f8fafc',
+      minHeight: '100vh'
+    }}>
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        marginBottom: 32,
+        background: '#fff',
+        padding: '24px',
+        borderRadius: 12,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+      }}>
         <button 
           onClick={() => navigate('/dashboard')}
           style={{
-            background: 'linear-gradient(90deg, #6366f1 0%, #2563eb 100%)',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 6,
-            padding: '8px 18px',
-            fontWeight: 600,
-            cursor: 'pointer',
-            fontSize: 15,
-            boxShadow: '0 2px 8px rgba(99,102,241,0.10)',
-            marginRight: 20
+            ...buttonStyle,
+            marginRight: 24,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8
           }}
         >
-          ← Back to Dashboard
+          <span style={{ fontSize: 20 }}>←</span> Back to Dashboard
         </button>
-        <h2 style={{ margin: 0 }}>Projects</h2>
+        <h2 style={{ 
+          margin: 0,
+          fontSize: 24,
+          color: '#1e293b',
+          fontWeight: 600
+        }}>Projects</h2>
       </div>
-      <button 
-        onClick={() => setShowForm(f => !f)}
-        style={{
-          background: 'linear-gradient(90deg, #6366f1 0%, #2563eb 100%)',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 6,
-          padding: '8px 18px',
-          fontWeight: 600,
-          cursor: 'pointer',
-          fontSize: 15,
-          boxShadow: '0 2px 8px rgba(99,102,241,0.10)'
-        }}
-      >
-        {showForm ? 'Cancel' : 'Create Project'}
-      </button>
-      {showForm && (
-        <form onSubmit={handleCreate} style={{ margin: '20px 0' }}>
-          <input
-            placeholder="Title"
-            value={form.title}
-            onChange={e => setForm({ ...form, title: e.target.value })}
-            required
-            style={{
-              width: '100%',
-              marginBottom: 8,
-              padding: 8,
-              borderRadius: 4,
-              border: '1px solid #d1d5db'
-            }}
-          />
-          <input
-            placeholder="Description"
-            value={form.description}
-            onChange={e => setForm({ ...form, description: e.target.value })}
-            style={{
-              width: '100%',
-              marginBottom: 8,
-              padding: 8,
-              borderRadius: 4,
-              border: '1px solid #d1d5db'
-            }}
-          />
-          <button 
-            type="submit"
-            style={{
-              background: 'linear-gradient(90deg, #6366f1 0%, #2563eb 100%)',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 6,
-              padding: '8px 18px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              fontSize: 15,
-              boxShadow: '0 2px 8px rgba(99,102,241,0.10)'
-            }}
-          >
-            Create
-          </button>
-        </form>
-      )}
-      {loading ? <div>Loading...</div> : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+
+      <div style={{
+        background: '#fff',
+        padding: '24px',
+        borderRadius: 12,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+        marginBottom: 24
+      }}>
+        <button 
+          onClick={() => setShowForm(f => !f)}
+          style={{
+            ...buttonStyle,
+            background: showForm ? '#64748b' : 'linear-gradient(90deg, #6366f1 0%, #2563eb 100%)'
+          }}
+        >
+          {showForm ? 'Cancel' : '+ Create Project'}
+        </button>
+
+        {showForm && (
+          <form onSubmit={handleCreate} style={{ 
+            marginTop: 24,
+            padding: '24px',
+            background: '#f8fafc',
+            borderRadius: 8
+          }}>
+            <input
+              placeholder="Project Title"
+              value={form.title}
+              onChange={e => setForm({ ...form, title: e.target.value })}
+              required
+              style={inputStyle}
+            />
+            <input
+              placeholder="Project Description"
+              value={form.description}
+              onChange={e => setForm({ ...form, description: e.target.value })}
+              style={inputStyle}
+            />
+            <button 
+              type="submit"
+              style={buttonStyle}
+            >
+              Create Project
+            </button>
+          </form>
+        )}
+      </div>
+
+      {loading ? (
+        <div style={{
+          textAlign: 'center',
+          padding: '40px',
+          color: '#64748b',
+          fontSize: 16
+        }}>
+          Loading projects...
+        </div>
+      ) : (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: 24
+        }}>
           {projects.map(p => (
-            <li key={p._id} style={{ 
-              margin: '16px 0',
+            <div key={p._id} style={{ 
               background: '#fff',
-              borderRadius: 10,
-              padding: 16,
-              boxShadow: '0 1px 4px #e0e7ef'
+              borderRadius: 12,
+              padding: 24,
+              boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+              transition: 'all 0.2s ease',
+              border: '1px solid #e2e8f0',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+              }
             }}>
-              <b style={{ fontSize: 17 }}>{p.title}</b> <br />
-              <span style={{ fontSize: 14, color: '#64748b' }}>{p.description}</span> <br />
+              <h3 style={{ 
+                fontSize: 18,
+                color: '#1e293b',
+                margin: '0 0 12px 0',
+                fontWeight: 600
+              }}>{p.title}</h3>
+              <p style={{ 
+                fontSize: 14,
+                color: '#64748b',
+                margin: '0 0 20px 0',
+                lineHeight: 1.5
+              }}>{p.description}</p>
               <button 
                 onClick={() => navigate(`/projects/${p._id}`)}
                 style={{
-                  background: 'linear-gradient(90deg, #6366f1 0%, #2563eb 100%)',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: 6,
-                  padding: '8px 18px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  fontSize: 15,
-                  boxShadow: '0 2px 8px rgba(99,102,241,0.10)',
-                  marginTop: 8
+                  ...buttonStyle,
+                  width: '100%'
                 }}
               >
-                View
+                View Project
               </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
