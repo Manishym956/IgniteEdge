@@ -316,7 +316,8 @@ export const removeTeamRole = async (req, res) => {
 
     // Send email notification
     try {
-      await sendMail({
+      await transporter.sendMail({
+        from: process.env.SENDER_EMAIL,
         to: user.email,
         subject: 'Your Role Has Been Removed',
         text: 'Your role has been removed from the system.',
