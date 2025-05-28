@@ -28,7 +28,7 @@ const ForgetPassword = () => {
         toast.success('OTP sent successfully!');
         localStorage.setItem('resetEmail', email);
         setTimeout(() => {
-         navigate('/Authentication/OtpVerification', { state: { email, isPasswordReset: true } });
+         navigate('/OtpVerificationreset', { state: { email, isPasswordReset: true } });
         }, 2000);
       } else {
         toast.error(response.message || 'Failed to send OTP');
@@ -82,6 +82,12 @@ const ForgetPassword = () => {
                 {isSubmitting ? 'SENDING...' : 'RESET PASSWORD'}
               </button>
             </form>
+            <button 
+              onClick={() => navigate('/Authentication/Login')} 
+              className="back-button"
+            >
+              Back to Login
+            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../styles/genz-modal.css";
 import ChartCard from "./ChartCard.jsx";
 import ProfitLossForm from "./ProfitLossForm.jsx";
 import ProfitLossChart from "../charts/ProfitLossChart.jsx";
@@ -63,35 +64,23 @@ const ProfitLossSection = () => {
   };
 
   return (
-    <div>
-      <ChartCard title="Profit & Loss Summary" onClick={handleAddClick} />
-
-      {/* Show chart */}
-      <ProfitLossChart records={profitLossData} />
-
-      {/* Pass editingRecord for modal to prefill inputs on edit */}
-      <ProfitLossForm
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSave={handleSubmit}
-        initialData={editingRecord}
-      />
-
-      {/* List with edit/delete buttons */}
-      <div style={{ marginTop: "20px" }}>
-        <h3>Records</h3>
-        {profitLossData.length === 0 && <p>No records yet.</p>}
-        <ul>
-          {profitLossData.map(record => (
-  <li key={record._id}>
-    <strong>{record.period}:</strong> Profit/Loss: {record.profitOrLoss}
-    <button onClick={() => handleEditClick(record)}>Edit</button>
-    <button onClick={() => handleDeleteClick(record._id)}>Delete</button>
-  </li>
-))}
-        </ul>
+    <>
+      <div className="genz-chart-header" style={{ marginBottom: 0 }}>
+        <h2 className="box-header" style={{ margin: 0 }}>Profit & Loss</h2>
+        <button className="genz-submit-btn" style={{marginLeft: 'auto'}} onClick={handleAddClick}>+ Add Entry</button>
       </div>
-    </div>
+      <div className="genz-chart-card">
+        {/* Show chart */}
+        <ProfitLossChart records={profitLossData} />
+        {/* Pass editingRecord for modal to prefill inputs on edit */}
+        <ProfitLossForm
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSubmit}
+          initialData={editingRecord}
+        />
+      </div>
+    </>
   );
 };
 

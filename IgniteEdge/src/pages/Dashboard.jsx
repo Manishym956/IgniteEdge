@@ -6,6 +6,12 @@ import React from 'react';
 import Modal from 'react-modal';
 import RevenueSection from "../components/RevenueSection.jsx";
 import ProfitLossSection from "../components/ProfitLossSection.jsx";
+import ExpenseSection from "../components/ExpenseSection.jsx";
+import DepartmentPerformanceSection from "../components/DepartmentPerformanceSection.jsx";
+import ProjectTimeAllocationSection from "../components/ProjectTimeAllocationSection.jsx";
+import KPITrendsSection from "../components/KPITrendsSection.jsx";
+import GeoDistributionSection from "../components/GeoDistributionSection.jsx";
+import ReminderBar from "../components/ReminderBar.jsx";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -25,6 +31,8 @@ export default function Dashboard() {
     }
   };
 
+  const userName = localStorage.getItem('userName') || 'User';
+
   return (
     <div className="dashboard">
       <div className="sidebar">
@@ -32,30 +40,45 @@ export default function Dashboard() {
           <div className="avatar" style={{ cursor: 'pointer' }} onClick={() => navigate('/Profile')}>
             <User size={32} />
           </div>
-          <span className="name">John Doe</span>
+          <span className="name">{userName}</span>
         </div>
 
         <nav className="nav">
           <NavItem icon={<Home size={20} />} text="Home" active />
           <NavItem icon={<Users size={20} />} text="Employee" onClick={() => navigate('/EmployeeList')}/>
           <NavItem icon={<Clipboard size={20} />} text="Task Management" onClick={() => navigate('/projects')} />
-          <NavItem icon={<Settings size={20} />} text="Settings" />
+          <NavItem icon={<Settings size={20} />} text="Settings" onClick={() => navigate('/Settings')} />
           <NavItem icon={<LogOut size={20} />} text="Logout" onClick={handleLogout} />
         </nav>
       </div>
 
-      <div className="main-content">
-        <div className="dashboard-grid">
-  <div className="dashboard-box">
-    <h2 className="box-header">Revenue</h2>
-    <RevenueSection />
-  </div>
-
-  <div className="dashboard-box">
-    <h2 className="box-header">Profit & Loss</h2>
-    <ProfitLossSection />
-  </div>
-</div>
+      <div style={{ flex: 1 }}>
+        <ReminderBar />
+        <div className="main-content">
+          <div className="dashboard-grid">
+            <div className="dashboard-box">
+              <RevenueSection />
+            </div>
+            <div className="dashboard-box">
+              <ProfitLossSection />
+            </div>
+            <div className="dashboard-box">
+              <ExpenseSection />
+            </div>
+            <div className="dashboard-box">
+              <DepartmentPerformanceSection />
+            </div>
+            <div className="dashboard-box">
+              <KPITrendsSection />
+            </div>
+            <div className="dashboard-box">
+              <GeoDistributionSection />
+            </div>
+            <div className="dashboard-box full-width">
+              <ProjectTimeAllocationSection />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

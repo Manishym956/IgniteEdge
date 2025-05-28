@@ -1,0 +1,133 @@
+/* GenZ Modal and Chart Styles */
+.genz-modal-overlay {
+  background: rgba(30, 58, 138, 0.25);
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+}
+.genz-modal {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.18);
+  padding: 2.5rem 2rem 2rem 2rem;
+  min-width: 340px;
+  max-width: 95vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.genz-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 0.3rem;
+  margin-top: 0.2rem;
+  letter-spacing: 0.01em;
+  display: block;
+}
+.genz-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+.genz-input {
+  border: none;
+  border-radius: 10px;
+  background: #e0e7ff;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.1rem;
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.07);
+  outline: none;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.genz-input:focus {
+  background: #dbeafe;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+.genz-submit-btn {
+  background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.13);
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 0.5rem;
+}
+.genz-submit-btn:hover {
+  background: linear-gradient(90deg, #2563eb 0%, #6366f1 100%);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.18);
+}
+.genz-cancel-btn {
+  background: #e0e7ff;
+  color: #2563eb;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.genz-cancel-btn:hover {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.genz-chart-card {
+  background: linear-gradient(120deg, #e0e7ff 60%, #f0f9ff 100%);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.13);
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+}
+.genz-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: 0.01em;
+  position: relative;
+}
+.genz-chart-title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: 0.01em;
+}
+.dashboard-brand {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #2563eb;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.04em;
+  font-family: 'Inter', sans-serif;
+}
+body.dark .genz-chart-card {
+  background: linear-gradient(120deg, #23232a 60%, #18181b 100%);
+  color: #e0e7ff;
+  box-shadow: 0 8px 32px rgba(30, 41, 59, 0.18);
+}
+body.dark .genz-chart-header,
+body.dark .genz-chart-title {
+  color: #60a5fa;
+} 

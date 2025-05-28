@@ -45,36 +45,19 @@ const SignupPage = () => {
       console.log('Register response:', registerResponse); // Debug log
 
       if (registerResponse.success && registerResponse.user) {
-        toast.success('Account created successfully!');
-        
+        toast.success('Account created successfully! Verification code sent to your email.');
         // Store user data temporarily
         localStorage.setItem('tempUserId', registerResponse.user._id);
         localStorage.setItem('tempEmail', registerResponse.user.email);
-
-        // Send verification OTP
-        try {
-          const otpResponse = await authService.sendVerifyOtp(registerResponse.user._id);
-          
-          console.log('OTP response:', otpResponse); // Debug log
-
-          if (otpResponse.success) {
-            toast.success('Verification code sent to your email!');
-            // Navigate after a short delay to ensure toast is visible
-            setTimeout(() => {
-              navigate('/verify-otp', {
-                state: {
-                  userId: registerResponse.user._id,
-                  email: registerResponse.user.email
-                }
-              });
-            }, 1500);
-          } else {
-            throw new Error(otpResponse.message || 'Failed to send verification code');
-          }
-        } catch (otpError) {
-          console.error('OTP error:', otpError);
-          toast.error('Failed to send verification code. Please try again.');
-        }
+        // Navigate after a short delay to ensure toast is visible
+        setTimeout(() => {
+          navigate('/Authentication/OtpVerification', {
+            state: {
+              userId: registerResponse.user._id,
+              email: registerResponse.user.email
+            }
+          });
+        }, 1500);
       } else {
         throw new Error(registerResponse.message || 'Registration failed');
       }

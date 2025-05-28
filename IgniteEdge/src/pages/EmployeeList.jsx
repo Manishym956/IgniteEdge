@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { employeeService } from "../services/api"
 import styles from "./EmployeeList.module.css"
-import SearchPanel from "./SearchPanel"
+import { jsPDF } from "jspdf"
+import autoTable from 'jspdf-autotable'
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([])
@@ -12,6 +13,12 @@ const EmployeeList = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [refreshKey, setRefreshKey] = useState(0)
+  const [searchParams, setSearchParams] = useState({
+    name: '',
+    department: '',
+    position: '',
+    status: ''
+  })
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -42,7 +49,7 @@ const EmployeeList = () => {
     }
   }
 
-  const handleSearch = (searchParams) => {
+  const handleSearch = () => {
     const filtered = employees.filter(employee => {
       return (
         (searchParams.name === '' || 
@@ -59,7 +66,33 @@ const EmployeeList = () => {
   }
 
   const handleClear = () => {
+    setSearchParams({
+      name: '',
+      department: '',
+      position: '',
+      status: ''
+    })
     setFilteredEmployees(employees)
+  }
+
+  const handleInputChange = (field, value) => {
+    const newParams = { ...searchParams, [field]: value }
+    setSearchParams(newParams)
+    
+    // Auto-filter as user types
+    const filtered = employees.filter(employee => {
+      return (
+        (newParams.name === '' || 
+          employee.name.toLowerCase().includes(newParams.name.toLowerCase())) &&
+        (newParams.department === '' || 
+          employee.department.toLowerCase().includes(newParams.department.toLowerCase())) &&
+        (newParams.position === '' || 
+          employee.position.toLowerCase().includes(newParams.position.toLowerCase())) &&
+        (newParams.status === '' || 
+          employee.status === newParams.status)
+      )
+    })
+    setFilteredEmployees(filtered)
   }
 
   const handleDelete = async (id) => {
@@ -75,10 +108,54 @@ const EmployeeList = () => {
     }
   }
 
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF()
+    
+    // Add title
+    doc.setFontSize(20)
+    doc.text('Employee List', 14, 15)
+    
+    // Add date
+    doc.setFontSize(10)
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22)
+    
+    // Create table
+    const tableColumn = ['Name', 'Department', 'Position', 'Status']
+    const tableRows = filteredEmployees.map(employee => [
+      employee.name,
+      employee.department || 'N/A',
+      employee.position || 'N/A',
+      employee.status
+    ])
+    
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 30,
+      theme: 'grid',
+      styles: {
+        fontSize: 8,
+        cellPadding: 2,
+      },
+      headStyles: {
+        fillColor: [21, 47, 109],
+        textColor: 255,
+        fontSize: 10,
+        fontStyle: 'bold',
+      },
+      alternateRowStyles: {
+        fillColor: [245, 245, 245],
+      },
+    })
+    
+    // Save the PDF
+    doc.save('employee-list.pdf')
+  }
+
   if (loading) {
     return (
       <div className={styles.loading}>
-        <div className="spinner"></div>
+        <div className={styles.spinner}></div>
       </div>
     )
   }
@@ -91,14 +168,58 @@ const EmployeeList = () => {
     <div className={styles.employeeList}>
       <div className={styles.topBar}>
         <button className={styles.backButton} onClick={() => navigate('/Dashboard')}>
-          ← Back to Dashboard
+          Back to Dashboard
         </button>
         <h2 className={styles.pageTitle}>Employee List</h2>
-        <Link to="/add" className={styles.addButton}>
-          + Add New Employee
-        </Link>
+        <div className={styles.topBarActions}>
+          <button className={styles.downloadButton} onClick={handleDownloadPDF}>
+            Download PDF
+          </button>
+          <Link to="/add" className={styles.addButton}>
+            Add New Employee
+          </Link>
+        </div>
       </div>
-      <SearchPanel onSearch={handleSearch} onClear={handleClear} />
+      
+      {/* Simple Search Panel without icons */}
+      <div className={styles.searchPanelWrapper}>
+        <h3 className={styles.searchPanelHeading}>Search Employees</h3>
+        <div className={styles.searchForm}>
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchParams.name}
+            onChange={(e) => handleInputChange('name', e.target.value)}
+            className={styles.searchInput}
+          />
+          <input
+            type="text"
+            placeholder="Department..."
+            value={searchParams.department}
+            onChange={(e) => handleInputChange('department', e.target.value)}
+            className={styles.searchInput}
+          />
+          <input
+            type="text"
+            placeholder="Position..."
+            value={searchParams.position}
+            onChange={(e) => handleInputChange('position', e.target.value)}
+            className={styles.searchInput}
+          />
+          <select
+            value={searchParams.status}
+            onChange={(e) => handleInputChange('status', e.target.value)}
+            className={styles.searchSelect}
+          >
+            <option value="">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <button onClick={handleClear} className={styles.clearButton}>
+            Clear
+          </button>
+        </div>
+      </div>
       
       {filteredEmployees.length === 0 ? (
         <div className={styles.emptyState}>
