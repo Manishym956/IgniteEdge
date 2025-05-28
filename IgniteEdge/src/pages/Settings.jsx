@@ -25,9 +25,21 @@ const Settings = () => {
   const [passwords, setPasswords] = useState({ old: '', new: '', confirm: '' });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  
+  // New state for team roles
+  const [teamRoles, setTeamRoles] = useState([]);
+  const [newRole, setNewRole] = useState({ email: '', designation: '' });
+  const [roleMessage, setRoleMessage] = useState('');
+
+  const roleOptions = [
+    { value: 'teamLead', label: 'Team Lead' },
+    { value: 'projectManager', label: 'Project Manager' },
+    { value: 'hr', label: 'HR' }
+  ];
 
   useEffect(() => {
     fetchSettings();
+    fetchTeamRoles();
     // Apply theme on mount
     const theme = localStorage.getItem('theme');
     setTheme(theme === 'dark');
@@ -40,12 +52,54 @@ const Settings = () => {
         setSettings(res.data.settings);
         setName(res.data.name || '');
         setEmail(res.data.email || '');
-        // Update local storage or context with fetched name
         localStorage.setItem('userName', res.data.name);
       }
     } catch (err) {
       console.error('Settings fetch error:', err);
       setMessage('Failed to load settings');
+    }
+  };
+
+  const fetchTeamRoles = async () => {
+    try {
+      const res = await axios.get('/api/auth/team-roles', { withCredentials: true });
+      if (res.data.success) {
+        setTeamRoles(res.data.roles);
+      }
+    } catch (err) {
+      console.error('Team roles fetch error:', err);
+      setRoleMessage('Failed to load team roles');
+    }
+  };
+
+  const handleAddRole = async (e) => {
+    e.preventDefault();
+    setRoleMessage('');
+    try {
+      const res = await axios.post('/api/auth/add-team-role', newRole, { withCredentials: true });
+      if (res.data.success) {
+        setRoleMessage('Team role added successfully!');
+        setNewRole({ email: '', designation: '' });
+        fetchTeamRoles();
+      } else {
+        setRoleMessage(res.data.message || 'Failed to add team role');
+      }
+    } catch (err) {
+      console.error('Add role error:', err);
+      setRoleMessage(err.response?.data?.message || 'Failed to add team role');
+    }
+  };
+
+  const handleRemoveRole = async (roleId) => {
+    try {
+      const res = await axios.delete(`/api/auth/team-role/${roleId}`, { withCredentials: true });
+      if (res.data.success) {
+        setRoleMessage('Team role removed successfully!');
+        fetchTeamRoles();
+      }
+    } catch (err) {
+      console.error('Remove role error:', err);
+      setRoleMessage('Failed to remove team role');
     }
   };
 
@@ -71,7 +125,6 @@ const Settings = () => {
 
       if (res.data.success) {
         setMessage('Settings updated successfully!');
-        // Update local storage or context with new name if needed
         localStorage.setItem('userName', name);
       } else {
         setMessage(res.data.message || 'Failed to update settings');
@@ -144,6 +197,69 @@ const Settings = () => {
         <h2 className="settings-title">Settings</h2>
       </div>
       {message && <div className="settings-message">{message}</div>}
+      
+      {/* Team Roles Section */}
+      <div className="settings-section">
+        <h3 className="settings-subtitle">Team Roles Management</h3>
+        {roleMessage && <div className="settings-message">{roleMessage}</div>}
+        <form onSubmit={handleAddRole} className="settings-form">
+          <div className="settings-form-group">
+            <label className="settings-label">Email</label>
+            <input
+              type="email"
+              className="settings-input"
+              value={newRole.email}
+              onChange={e => setNewRole(prev => ({ ...prev, email: e.target.value }))}
+              placeholder="Enter email address"
+              required
+            />
+          </div>
+          <div className="settings-form-group">
+            <label className="settings-label">Role Designation</label>
+            <select
+              className="settings-input"
+              value={newRole.designation}
+              onChange={e => setNewRole(prev => ({ ...prev, designation: e.target.value }))}
+              required
+            >
+              <option value="">Select Role</option>
+              {roleOptions.map(role => (
+                <option key={role.value} value={role.value}>
+                  {role.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button type="submit" className="settings-save-btn" disabled={loading}>
+            Add Team Role
+          </button>
+        </form>
+
+        <div className="settings-roles-list">
+          <h4 className="settings-subtitle">Current Team Roles</h4>
+          {teamRoles.map(role => (
+            <div key={role._id} className="settings-role-item">
+              <div className="settings-role-info">
+                <span className="settings-role-email">{role.email}</span>
+                <span className="settings-role-designation">
+                  {roleOptions.find(r => r.value === role.designation)?.label || role.designation}
+                </span>
+              </div>
+              <button
+                onClick={() => handleRemoveRole(role._id)}
+                className="settings-delete-btn"
+                disabled={loading}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <hr className="settings-divider" />
+
+      {/* Existing Settings Sections */}
       <div className="settings-section">
         <label className="settings-label">Display Name</label>
         <input className="settings-input" value={name} onChange={e => setName(e.target.value)} />
@@ -163,18 +279,28 @@ const Settings = () => {
         <label className="settings-label">Notifications</label>
         <input type="checkbox" checked={settings.notifications} onChange={e => handleSettingsChange('notifications', e.target.checked)} />
       </div>
-      <button className="settings-save-btn" onClick={handleSave} disabled={loading}>{loading ? 'Saving...' : 'Save Settings'}</button>
+      <button className="settings-save-btn" onClick={handleSave} disabled={loading}>
+        {loading ? 'Saving...' : 'Save Settings'}
+      </button>
+
       <hr className="settings-divider" />
+
       <form className="settings-section" onSubmit={handlePasswordChange}>
         <label className="settings-label">Change Password</label>
         <input className="settings-input" type="password" placeholder="Old Password" value={passwords.old} onChange={e => setPasswords(p => ({ ...p, old: e.target.value }))} />
         <input className="settings-input" type="password" placeholder="New Password" value={passwords.new} onChange={e => setPasswords(p => ({ ...p, new: e.target.value }))} />
         <input className="settings-input" type="password" placeholder="Confirm New Password" value={passwords.confirm} onChange={e => setPasswords(p => ({ ...p, confirm: e.target.value }))} />
-        <button className="settings-save-btn" type="submit" disabled={loading}>{loading ? 'Changing...' : 'Change Password'}</button>
+        <button className="settings-save-btn" type="submit" disabled={loading}>
+          {loading ? 'Changing...' : 'Change Password'}
+        </button>
       </form>
+
       <hr className="settings-divider" />
+
       <div className="settings-section">
-        <button className="settings-delete-btn" onClick={handleDeleteAccount} disabled={loading}>Delete Account</button>
+        <button className="settings-delete-btn" onClick={handleDeleteAccount} disabled={loading}>
+          Delete Account
+        </button>
       </div>
     </div>
   );

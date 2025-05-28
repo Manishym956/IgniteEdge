@@ -1,5 +1,5 @@
 import express from 'express';
-import { isAuthenticated, login, logout, register, resetPassword, sendResetOtp, sendVerifyOtp, verifyEmail, getUserSettings, updateUserSettings, changePassword } from '../controllers/authController.js';
+import { isAuthenticated, login, logout, register, resetPassword, sendResetOtp, sendVerifyOtp, verifyEmail, getUserSettings, updateUserSettings, changePassword, getTeamRoles, addTeamRole, removeTeamRole } from '../controllers/authController.js';
 import userAuth from '../middleware/userAuth.js';
 const authRouter = express.Router();
 
@@ -15,5 +15,9 @@ authRouter.post('/change-password', userAuth, changePassword);
 
 authRouter.get('/settings', userAuth, getUserSettings);
 authRouter.post('/settings', userAuth, updateUserSettings);
+
+authRouter.get('/team-roles', userAuth, getTeamRoles);
+authRouter.post('/add-team-role', userAuth, addTeamRole);
+authRouter.delete('/team-role/:roleId', userAuth, removeTeamRole);
 
 export default authRouter;
