@@ -1,8 +1,8 @@
-const API_URL = 'http://localhost:1600/api/tasks';
+import axiosInstance from '../config/api';
 
 export const getTasks = async (projectId) => {
-  const res = await fetch(`${API_URL}?project=${projectId}`);
-  return res.json();
+  const response = await axiosInstance.get(`/api/tasks?project=${projectId}`);
+  return response.data;
 };
 
 export const createTask = async (data) => {

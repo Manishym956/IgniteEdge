@@ -1,22 +1,18 @@
-const API_URL = 'http://localhost:1600/api/projects';
+import axiosInstance from '../config/api';
 
 export const getProjects = async () => {
-  const res = await fetch(API_URL);
-  return res.json();
+  const response = await axiosInstance.get('/api/projects');
+  return response.data;
 };
 
 export const createProject = async (data) => {
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  return res.json();
+  const response = await axiosInstance.post('/api/projects', data);
+  return response.data;
 };
 
 export const getProjectById = async (id) => {
-  const res = await fetch(`${API_URL}/${id}`);
-  return res.json();
+  const response = await axiosInstance.get(`/api/projects/${id}`);
+  return response.data;
 };
 
 export const inviteMember = async (id, email) => {
