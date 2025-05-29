@@ -17,7 +17,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      const response = await axios.get('http://localhost:1600/api/auth/logout', {
+      const response = await axios.get('https://igniteedge-1.onrender.com/api/auth/logout', {
         withCredentials: true,
       });
       if (response.data.success) {

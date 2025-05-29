@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Settings.css';
 import axios from 'axios';
 
 // Set the base URL for API calls
-axios.defaults.baseURL = 'http://localhost:1600'; // Updated to match backend port
+axios.defaults.baseURL = 'https://igniteedge-1.onrender.com'; // Updated to match backend port
+axios.defaults.withCredentials = true; // Enable sending cookies with requests
 
 // Utility to set theme globally
 function setTheme(isDark) {
@@ -76,7 +77,11 @@ const Settings = () => {
     e.preventDefault();
     setRoleMessage('');
     try {
-      const res = await axios.post('/api/auth/add-team-role', newRole, { withCredentials: true });
+      const res = await axios.post('/api/auth/add-team-role', {
+        email: newRole.email,
+        designation: newRole.designation
+      }, { withCredentials: true });
+      
       if (res.data.success) {
         setRoleMessage('Team role added successfully!');
         setNewRole({ email: '', designation: '' });
@@ -97,8 +102,8 @@ const Settings = () => {
         setRoleMessage('Team role removed successfully!');
         fetchTeamRoles();
       }
-    } catch (err) {
-      console.error('Remove role error:', err);
+    } catch (error) {
+      console.error('Remove role error:', error);
       setRoleMessage('Failed to remove team role');
     }
   };
@@ -178,13 +183,12 @@ const Settings = () => {
     setLoading(true);
     setMessage('');
     try {
-      // You should implement this endpoint in your backend
       const res = await axios.post('/api/auth/delete', {}, { withCredentials: true });
       if (res.data.success) {
         setMessage('Account deleted.');
         window.location.href = '/';
       } else setMessage(res.data.message || 'Failed to delete account');
-    } catch (err) {
+    } catch {
       setMessage('Failed to delete account');
     }
     setLoading(false);
@@ -242,7 +246,7 @@ const Settings = () => {
               <div className="settings-role-info">
                 <span className="settings-role-email">{role.email}</span>
                 <span className="settings-role-designation">
-                  {roleOptions.find(r => r.value === role.designation)?.label || role.designation}
+                  {roleOptions.find(r => r.value === role.role)?.label || role.role}
                 </span>
               </div>
               <button

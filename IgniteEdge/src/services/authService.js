@@ -1,15 +1,8 @@
-import axios from 'axios';
-
-const API_URL = 'http://localhost:1600/api/auth';
-
-const axiosInstance = axios.create({
-  baseURL: API_URL,
-  withCredentials: true
-});
+import axiosInstance, { API_URL } from '../config/api';
 
 const authService = {
     login: async (email, password) => {
-        const response = await axiosInstance.post('/login', { email, password });
+        const response = await axiosInstance.post('/api/auth/login', { email, password });
         return response.data;
     },
 
@@ -17,7 +10,7 @@ const authService = {
         try {
             console.log('Sending registration request:', { name, email }); // Debug log
 
-            const response = await axiosInstance.post('/register', {
+            const response = await axiosInstance.post('/api/auth/register', {
                 name,
                 email,
                 password
@@ -32,13 +25,13 @@ const authService = {
     },
 
     logout: async () => {
-        const response = await axiosInstance.get('/logout');
+        const response = await axiosInstance.get('/api/auth/logout');
         return response.data;
     },
 
     verifyEmail: async (userId, otp) => {
         try {
-            const response = await axiosInstance.post('/verify-account', { 
+            const response = await axiosInstance.post('/api/auth/verify-account', { 
                 userId, 
                 otp 
             });
@@ -53,7 +46,7 @@ const authService = {
         try {
             console.log('Sending OTP request for userId:', userId); // Debug log
 
-            const response = await axiosInstance.post('/send-verify-otp', { userId });
+            const response = await axiosInstance.post('/api/auth/send-verify-otp', { userId });
             
             console.log('OTP response:', response.data); // Debug log
             return response.data;
@@ -65,7 +58,7 @@ const authService = {
 
     isAuthenticated: async () => {
         try {
-            const response = await axiosInstance.post('/is-auth'); 
+            const response = await axiosInstance.post('/api/auth/is-auth'); 
             return response.data;
         } catch (error) {
             console.error('Auth check error:', error);
@@ -76,7 +69,7 @@ const authService = {
     sendResetOtp: async (email) => {
         try {
             console.log('Sending reset OTP API request for:', email); // Debug log
-            const response = await axiosInstance.post('/send-reset-otp', { email });
+            const response = await axiosInstance.post('/api/auth/send-reset-otp', { email });
             console.log('API Response:', response.data); // Debug log
             return response.data;
         } catch (error) {
@@ -87,7 +80,7 @@ const authService = {
 
     resetPassword: async (email, otp, newPassword) => {
         try {
-            const response = await axiosInstance.post('/reset-password', {
+            const response = await axiosInstance.post('/api/auth/reset-password', {
                 email,
                 otp,
                 newPassword

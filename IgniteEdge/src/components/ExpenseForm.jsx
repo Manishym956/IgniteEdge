@@ -14,7 +14,7 @@ const ExpenseForm = ({ onSuccess }) => {
     setError("");
     try {
       await axios.post(
-        "http://localhost:1600/api/expenses",
+        "https://igniteedge-1.onrender.com/api/expenses",
         { category, amount: Number(amount), date },
         { withCredentials: true }
       );

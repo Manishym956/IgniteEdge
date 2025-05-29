@@ -14,7 +14,7 @@ const KPITrendsSection = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:1600/api/kpi-trends", { withCredentials: true });
+      const res = await axios.get("https://igniteedge-1.onrender.com/api/kpi-trends", { withCredentials: true });
       setData(res.data);
     } catch (err) {
       setError("Failed to load KPI trends data");
@@ -31,7 +31,7 @@ const KPITrendsSection = () => {
   const handleCloseModal = () => setIsModalOpen(false);
   const handleSubmit = async (formData) => {
     await axios.post(
-      "http://localhost:1600/api/kpi-trends",
+      "https://igniteedge-1.onrender.com/api/kpi-trends",
       formData,
       { withCredentials: true }
     );

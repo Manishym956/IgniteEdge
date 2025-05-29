@@ -14,7 +14,7 @@ const DepartmentPerformanceSection = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:1600/api/department-performance", { withCredentials: true });
+      const res = await axios.get("https://igniteedge-1.onrender.com/api/department-performance", { withCredentials: true });
       setData(res.data);
     } catch (err) {
       setError("Failed to load department performance data");
@@ -31,7 +31,7 @@ const DepartmentPerformanceSection = () => {
   const handleCloseModal = () => setIsModalOpen(false);
   const handleSubmit = async (formData) => {
     await axios.post(
-      "http://localhost:1600/api/department-performance",
+      "https://igniteedge-1.onrender.com/api/department-performance",
       formData,
       { withCredentials: true }
     );

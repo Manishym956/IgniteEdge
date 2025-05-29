@@ -10,8 +10,6 @@ const AddEditEmployee = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [profileImage, setProfileImage] = useState(null)
-  const [imagePreview, setImagePreview] = useState(null)
 
   const [employee, setEmployee] = useState({
     name: "",
@@ -54,11 +52,6 @@ const AddEditEmployee = () => {
       }
 
       setEmployee(data)
-
-      if (data.profileImage) {
-        setImagePreview(`http://localhost:5000/uploads/${data.profileImage}`)
-      }
-
       setError(null)
     } catch (err) {
       setError("Failed to fetch employee details. Please try again.")
@@ -73,41 +66,16 @@ const AddEditEmployee = () => {
     setEmployee({ ...employee, [name]: value })
   }
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      setProfileImage(file)
-
-      // Create preview
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
       setLoading(true)
-
-      // Create a copy of employee data for submission
-      const employeeData = { ...employee }
-
-      // Add profile image if selected
-      if (profileImage) {
-        employeeData.profileImage = profileImage
-      }
-
       if (id) {
-        await employeeService.update(id, employeeData)
+        await employeeService.update(id, employee)
       } else {
-        await employeeService.create(employeeData)
+        await employeeService.create(employee)
       }
-
-      // Change navigation to employee list page
       navigate("/EmployeeList", { state: { refresh: true } })
     } catch (err) {
       setError("Failed to save employee. Please check your inputs and try again.")
@@ -140,7 +108,7 @@ const AddEditEmployee = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className={styles.form} encType="multipart/form-data">
+        <form onSubmit={handleSubmit} className={styles.form}>
           {/* Personal Information */}
           <div className={styles.formGroup}>
             <label className={`form-label ${styles.required}`}>Name</label>
@@ -303,23 +271,6 @@ const AddEditEmployee = () => {
               value={employee.panNumber || ""}
               onChange={handleChange}
             />
-          </div>
-
-          {/* Profile Image */}
-          <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-            <label className="form-label">Profile Image</label>
-            <div className={styles.imageUpload}>
-              {imagePreview && (
-                <img src={imagePreview || "/placeholder.svg"} alt="Profile Preview" className={styles.imagePreview} />
-              )}
-              <input
-                type="file"
-                name="profileImage"
-                className="form-control"
-                onChange={handleImageChange}
-                accept="image/*"
-              />
-            </div>
           </div>
 
           {/* Form Actions */}

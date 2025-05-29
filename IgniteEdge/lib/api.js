@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:1600/api',
+  baseURL: 'https://igniteedge-1.onrender.com/api',
   withCredentials: true, 
 });
 
