@@ -26,7 +26,7 @@ connectDB();
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? [
-        'https://igniteedge.netlify.app/',  // New Vercel domain
+        'https://igniteedge.netlify.app',  // New Vercel domain
         'https://ignite-edge-w2e3-vor8bybvk-manish-y-ms-projects.vercel.app',  // Previous Vercel domain
         'http://localhost:5173'
       ]
