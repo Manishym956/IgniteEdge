@@ -14,7 +14,7 @@ const GeoDistributionSection = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:1600/api/geo-distribution", { withCredentials: true });
+      const res = await axios.get("https://igniteedge-1.onrender.com/api/geo-distribution", { withCredentials: true });
       setData(res.data);
     } catch (err) {
       setError("Failed to load geo distribution data");
@@ -31,7 +31,7 @@ const GeoDistributionSection = () => {
   const handleCloseModal = () => setIsModalOpen(false);
   const handleSubmit = async (formData) => {
     await axios.post(
-      "http://localhost:1600/api/geo-distribution",
+      "https://igniteedge-1.onrender.com/api/geo-distribution",
       formData,
       { withCredentials: true }
     );

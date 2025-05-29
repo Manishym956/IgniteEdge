@@ -56,7 +56,15 @@ export const login=async(req,res)=>{
             return res.json({success:false,message:"Invalid Credentials"});
         }
         const token =jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
-        res.cookie('token',token, {httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:process.env.NODE_ENV==='production'?'none':'strict',maxAge:7*24*60*60*1000});
+        // Always use SameSite: 'none' and secure: true for cross-site cookies
+        // NOTE: You must run your backend with HTTPS for this to work in local development
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // Always true for cross-site cookies
+            sameSite: 'none', // Always 'none' for cross-site cookies
+            path: '/', // Explicitly set path
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
         return res.json({success:true,message:"Login successful",user:{name:user.name,email:user.email}})
     }catch(error){
         res.json({success:false,message:error.message})
@@ -64,7 +72,14 @@ export const login=async(req,res)=>{
 }
 export  const logout=async(req,res)=>{
     try{
-        res.clearCookie('token', {httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:process.env.NODE_ENV==='production'?'none':'strict'});
+        // Always use SameSite: 'none' and secure: true for cross-site cookies
+        // NOTE: You must run your backend with HTTPS for this to work in local development
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: true, // Always true for cross-site cookies
+            sameSite: 'none', // Always 'none' for cross-site cookies
+            path: '/' // Explicitly set path
+        });
         return res.json({success:true,message:"Logout successful"})
     }catch(error){
         res.json({success:false,message:error.message})

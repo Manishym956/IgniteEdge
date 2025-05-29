@@ -20,7 +20,7 @@ const ReminderBar = () => {
     setError("");
     try {
       const res = await axios.get(
-        `http://localhost:1600/api/reminders?date=${selectedDate.toISOString().slice(0, 10)}`,
+        `https://igniteedge-1.onrender.com/api/reminders?date=${selectedDate.toISOString().slice(0, 10)}`,
         { withCredentials: true }
       );
       setReminders(res.data);
@@ -41,7 +41,7 @@ const ReminderBar = () => {
     setError("");
     try {
       await axios.post(
-        "http://localhost:1600/api/reminders",
+        "https://igniteedge-1.onrender.com/api/reminders",
         { message, date: date.toISOString().slice(0, 10) },
         { withCredentials: true }
       );
@@ -56,7 +56,7 @@ const ReminderBar = () => {
   };
 
   const handleMarkDone = async (id) => {
-    await axios.patch(`http://localhost:1600/api/reminders/${id}`, {}, { withCredentials: true });
+    await axios.patch(`https://igniteedge-1.onrender.com/api/reminders/${id}`, {}, { withCredentials: true });
     fetchReminders(date);
   };
 

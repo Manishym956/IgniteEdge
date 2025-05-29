@@ -4,7 +4,7 @@ import '../styles/Settings.css';
 import axios from 'axios';
 
 // Set the base URL for API calls
-axios.defaults.baseURL = 'http://localhost:1600'; // Updated to match backend port
+axios.defaults.baseURL = 'https://igniteedge-1.onrender.com'; // Updated to match backend port
 axios.defaults.withCredentials = true; // Enable sending cookies with requests
 
 // Utility to set theme globally
