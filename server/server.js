@@ -22,20 +22,22 @@ const port = process.env.PORT || 1600;
 connectDB();
 
 
+const allowedOrigins = [
+  'https://igniteedge.netlify.app',
+  'http://localhost:5173'
+];
 
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? [
-        'https://igniteedge.netlify.app',  // New Vercel domain
-        'https://ignite-edge-w2e3-vor8bybvk-manish-y-ms-projects.vercel.app',  // Previous Vercel domain
-        'http://localhost:5173'
-      ]
-    : 'http://localhost:5173',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-  exposedHeaders: ['Set-Cookie']
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
+
 
 app.use(express.json());
 app.use(cookieparser());
