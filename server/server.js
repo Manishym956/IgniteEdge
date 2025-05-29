@@ -23,9 +23,16 @@ connectDB();
 
 
 const allowedOrigins = [
-  'https://igniteedge.netlify.app',
-  'http://localhost:5173'
+  'https://igniteedge.netlify.app'
 ];
+if (process.env.NODE_ENV !== 'production') {
+  allowedOrigins.push('http://localhost:5173');
+}
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 app.use(cors({
   origin: function (origin, callback) {
