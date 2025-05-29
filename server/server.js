@@ -25,11 +25,12 @@ connectDB();
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://ignite-edge.vercel.app', 'http://localhost:5173']  // Add your Vercel URL here
+    ? ['https://ignite-edge-w2e3-vor8bybvk-manish-y-ms-projects.vercel.app', 'http://localhost:5173']  // Updated Vercel URL
     : 'http://localhost:5173',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+  exposedHeaders: ['Set-Cookie']
 }));
 
 app.use(express.json());

@@ -11,15 +11,11 @@ export const createAutomation = async (data) => {
 };
 
 export const updateAutomation = async (id, data) => {
-  const res = await fetch(`${API_URL}/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  return res.json();
+  const response = await axiosInstance.put(`/api/automations/${id}`, data);
+  return response.data;
 };
 
 export const deleteAutomation = async (id) => {
-  const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-  return res.json();
+  const response = await axiosInstance.delete(`/api/automations/${id}`);
+  return response.data;
 }; 

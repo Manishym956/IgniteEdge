@@ -7,6 +7,6 @@ const API = axios.create({
 });
 
 export const getFinanceData = () => axiosInstance.get('/api/finance');
-export const createFinanceEntry = (data) => API.post("/api/finance", data);
-export const updateFinanceEntry = (id, data) => API.put(`/api/finance/${id}`, data);
-export const deleteFinanceEntry = (id) => API.delete(`/api/finance/${id}`);
+export const createFinanceEntry = (data) => axiosInstance.post('/api/finance', data);
+export const updateFinanceEntry = (id, data) => axiosInstance.put(`/api/finance/${id}`, data);
+export const deleteFinanceEntry = (id) => axiosInstance.delete(`/api/finance/${id}`);

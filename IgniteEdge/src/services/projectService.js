@@ -16,10 +16,6 @@ export const getProjectById = async (id) => {
 };
 
 export const inviteMember = async (id, email) => {
-  const res = await fetch(`${API_URL}/${id}/invite`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email })
-  });
-  return res.json();
+  const response = await axiosInstance.post(`/api/projects/${id}/invite`, { email });
+  return response.data;
 }; 
