@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env.VITE_API_URL': JSON.stringify(process.env.NODE_ENV === 'production' 
-      ? 'https://ignite-edge-backend.onrender.com'  // Your Render backend URL
+      ? 'https://igniteedge-1.onrender.com'  // Your Render backend URL
       : 'http://localhost:1600')
   }
 })

@@ -96,7 +96,7 @@ const ExpenseSection = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:1600/api/expenses/categories", { withCredentials: true });
+      const res = await axios.get("https://igniteedge-1.onrender.com/api/expenses/categories", { withCredentials: true });
       setData(res.data);
     } catch (err) {
       setError("Failed to load expense data");
@@ -113,7 +113,7 @@ const ExpenseSection = () => {
   const handleCloseModal = () => setIsModalOpen(false);
   const handleSubmit = async (formData) => {
     await axios.post(
-      "http://localhost:1600/api/expenses",
+      "https://igniteedge-1.onrender.com/api/expenses",
       formData,
       { withCredentials: true }
     );

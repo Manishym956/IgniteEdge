@@ -1,6 +1,6 @@
 // API Configuration
 const API_BASE_URL = import.meta.env.PROD 
-  ? 'https://ignite-edge-backend.onrender.com'
+  ? 'https://igniteedge-1.onrender.com'
   : 'http://localhost:1600';
 
 export const API_URL = `${API_BASE_URL}/api`;

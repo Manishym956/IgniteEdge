@@ -2,7 +2,7 @@ import axios from "axios";
 import axiosInstance from '../config/api';
 
 const API = axios.create({ 
-  baseURL: "http://localhost:1600",
+  baseURL: "https://igniteedge-1.onrender.com",
   withCredentials: true
 });
 

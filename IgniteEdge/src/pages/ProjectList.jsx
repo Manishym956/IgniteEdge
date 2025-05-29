@@ -15,7 +15,7 @@ const ProjectList = () => {
   const fetchProjects = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:1600/api/projects');
+      const res = await fetch('https://igniteedge-1.onrender.com/api/projects');
       const data = await res.json();
       setProjects(data);
     } catch (err) {
@@ -28,7 +28,7 @@ const ProjectList = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      await fetch('http://localhost:1600/api/projects', {
+      await fetch('https://igniteedge-1.onrender.com/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, members: [], owner: 'demo@user.com' }) // TODO: use real user
