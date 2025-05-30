@@ -1,6 +1,6 @@
 # IgniteEdge  
 A full-stack web application for project management and business analytics.  
-
+Project is deployed in this link: [IgniteEdge](https://igniteedge.netlify.app/)
 ## Overview  
 IgniteEdge is a comprehensive business management platform that combines project management capabilities with advanced analytics and financial tracking features.  
 
@@ -77,9 +77,3 @@ cd IgniteEdge
 cd server
 npm install
 npm run server
-npm start
-
-
-Repository
-The project is hosted on GitHub at:
-IgniteEdge Repository
