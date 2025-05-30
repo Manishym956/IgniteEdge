@@ -67,17 +67,16 @@ IgniteEdge is a comprehensive business management platform that combines project
 ### Getting Started  
 #### Install dependencies:  
 ```sh
+cd IgniteEdge
+cd IgniteEdge
 npm install
-Run the development server:
 npm run dev
 
-
-Build and Deployment
-To build the project:
-npm run build
-
-
-To start the production server:
+In another terminal:
+cd IgniteEdge
+cd server
+npm install
+npm run server
 npm start
 
 
