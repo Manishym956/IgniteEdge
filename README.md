@@ -1,2 +1,86 @@
-npm install jspdf jspdf-autotable
-in frontend
+# IgniteEdge  
+A full-stack web application for project management and business analytics.  
+
+## Overview  
+IgniteEdge is a comprehensive business management platform that combines project management capabilities with advanced analytics and financial tracking features.  
+
+## Tech Stack  
+
+### Frontend  
+- React + Vite  
+- CSS for styling  
+
+#### Libraries:  
+- `react-router-dom` (navigation)  
+- `axios` (API calls)  
+- `react-modal`  
+- `react-beautiful-dnd`  
+- `lucide-react` (icons)  
+
+### Backend  
+- Node.js  
+- Express.js  
+- MongoDB with Mongoose  
+
+#### Key Dependencies:  
+- `bcrypt` / `bcryptjs` (authentication)  
+- `jsonwebtoken` (JWT)  
+- `nodemailer` (email functionality)  
+- `cors`  
+- `dotenv`  
+
+## Key Features  
+
+### User Authentication  
+- Email verification system  
+- OTP-based verification  
+- Welcome email functionality  
+
+### Project Management  
+- Project creation and management  
+- Team member invitation system  
+- Custom project status management  
+- Email notifications for project invites  
+
+### Dashboard Features  
+- Revenue tracking  
+- Profit/Loss analysis  
+- Expense monitoring  
+- Department performance metrics  
+- Project time allocation  
+- KPI trends  
+- Geographical distribution analysis  
+- Reminder system  
+
+### Employee Management  
+- Employee listing  
+- PDF export functionality  
+- Employee data management  
+
+### Analytics & Reporting  
+- Custom dashboards  
+- Financial KPIs  
+- Data export capabilities  
+
+## Project Structure  
+
+### Getting Started  
+#### Install dependencies:  
+```sh
+npm install
+Run the development server:
+npm run dev
+
+
+Build and Deployment
+To build the project:
+npm run build
+
+
+To start the production server:
+npm start
+
+
+Repository
+The project is hosted on GitHub at:
+IgniteEdge Repository
